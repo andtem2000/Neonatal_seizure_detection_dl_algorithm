@@ -45,7 +45,7 @@ eeg_channels = 18 # 18 for Helsinki files
 filters = 32
 kernel = 5
 runs = 3
-path_2 = '../../Helsinki files/'
+path_2 = '../Helsinki files/'
 label = 'hski_mixupe_t50'
 results = 'resnxt_hski_val'
 
@@ -200,4 +200,4 @@ AUC = calc_roc(probs_full, downsampled_y_full, epoch_length=epoch_length) # Remo
 print('AUC %f, AUC90 %f' % (AUC))
 print('runs', runs)
 print("--- %.0f seconds ---" % (time.time() - start_time))
-np.save('Results/Anser1_hski_rxt_Anser2_' +str(kernel) + str(label) + 'AUC.npy', AUC)
+np.save('../Results/Anser1_hski_rxt_Anser2_' +str(kernel) + str(label) + 'AUC.npy', AUC)
