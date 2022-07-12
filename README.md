@@ -43,6 +43,13 @@ $ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
 | [GetData_perfile_512_1_hski.py](./Neonatal_Seizure_Resnext_algorithm/GetData_perfile_512_1_hski.py) |File for importing and loading EEG and annotation data|
 | [score_tool_DNN_resp_v.py](./Neonatal_Seizure_Resnext_algorithm/score_tool_DNN_resp_v.py) |File for calculating AUC, AUC90 with post processing|
 
+| Folder                                                                                | Description |    
+|-------------------------------------------------------------------------------------|---|        
+| [Benchmark_weights](./Benchmark_weights)             | Contains 3 sets of weights for the resnext model|
+| [Helsinki files](./Helsinki_files) |Contains EEG signal files and annotations|
+
+
+
 ## 5. EEG files
 
 The database of neonatal EEG used to develop the algorithms is available at DOI: 10.5281/zenodo.2547147 or https://zenodo.org/record/2547147 [1]
