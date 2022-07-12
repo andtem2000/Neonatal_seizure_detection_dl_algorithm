@@ -1,17 +1,17 @@
 <h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">  
   <br><br><strong>Neonatal Seizure Detection Resnext Algorithm</strong>  
   
-</h1>  
-<h1 align="center">  
-Aengus Daly et al.
-</h1>  
-  
 ---  
   ## Table of contents
 1. [Introduction](#introduction)  
 2. [Software requirements](#software-requirements)  
 3. [Software build](#software-build)  
-4. [Project files description](#project-files-description)  
+4. [Project files description](#project-files-description)
+5. [EEG files](#EEG files)
+6. [License](#License)
+7. [Authors](#Authors)
+8. [References](#References)
+9. [Contact](#Contact)
 
 ---  
 ## 1. Introduction
@@ -34,32 +34,33 @@ $ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
  
 ```  
   
-## 4. Project files description
+## 4. File descriptions
   
-* Feature Engineering and EDA
 
 | File                                                                                | Description |    
 |-------------------------------------------------------------------------------------|---|        
-| [psykose_feature_engineering.py](./code/psykose_feature_engineering.py)             | Reads the raw files of control and patients and generate the features |
-| [psykose_eda.py](./code/psykose_eda.py) <br/> [psykose_machine_learning_plots.py](./code/psykose_machine_learning_plots.py) ||
-  
-* Machine Learning 
+| [Inference_hski_resnxt_train_hski_50e.py](./Neonatal_Seizure_Resnext_algorithm/Inference_hski_resnxt_train_hski_50e.py)             | Main file for seizure detection|
+| [GetData_perfile_512_1_hski.py](./Neonatal_Seizure_Resnext_algorithm/GetData_perfile_512_1_hski.py) |File for importing and loading EEG and annotation data|
+| [score_tool_DNN_resp_v.py](./Neonatal_Seizure_Resnext_algorithm/score_tool_DNN_resp_v.py) |File for calculating AUC, AUC90 with post processing|
 
-| File                                                                            | Description                                                                   |    
-|---------------------------------------------------------------------------------|-------------------------------------------------------------------------------|                 
-| [psykose_machine_learning_models.py](./code/psykose_machine_learning_models.py) | Contains the ML models for 10-Fold Cross-Validation and LOO using One Day Out |
-| [psykose_machine_learning_loo.py](./code/psykose_machine_learning_loo.py)       | ML models for LOPO - leave one person out                                     |
-| [hyperparameter_tuning.py](./code/hyperparameter_tuning.py)                                 | Perform the models hyper parameters tuning                                    |
+## 5. EEG files
 
-- Deep Learning  
-
-| File | Description |
-|---|---|
-| [psyche_2_loo_time_cat_cnn2d_6_5_noval_6t.py](./code/psyche_2_loo_time_cat_cnn2d_6_5_noval_6t.py) | Contains the Deep Learning model |
+The database of neonatal EEG used to develop the algorithms is available at DOI: 10.5281/zenodo.2547147 or https://zenodo.org/record/2547147 [1]
 
 
-- Utils 
+## 6. License
 
-| File | Description                                |
-|---|--------------------------------------------|
-|[my_metrics.py](./code/my_metrics.py) | Class with the metrics used in the project |
+## 7. Authors
+Aengus Daly, Gordon Lightbody, Andriy Temko
+
+## 8. References
+[1]  Nathan Stevenson, Karoliina Tapani, Leena Lauronenand Sampsa Vanhatalo, “A dataset of neonatal EEG recordings with seizures annotations”. Zenodo, Jun. 05, 2018. doi: 10.5281/zenodo.2547147.
+
+## 9. Contact
+
+Aengus Daly 
+<br /> Munster Technological University,
+<br /> Cork City,
+<br /> Ireland.
+
+<br /> email aengus dot daly 'at' mtu.ie
