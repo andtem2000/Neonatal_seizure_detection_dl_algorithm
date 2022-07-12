@@ -41,7 +41,7 @@ $ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
 |-------------------------------------------------------------------------------------|---|        
 | [Inference_hski_resnxt_train_hski_50e.py](./Neonatal_Seizure_Resnext_algorithm/Inference_hski_resnxt_train_hski_50e.py)             | Main file for seizure detection|
 | [GetData_perfile_512_1_hski.py](./Neonatal_Seizure_Resnext_algorithm/GetData_perfile_512_1_hski.py) |File for importing and loading EEG and annotation data|
-| [score_tool_DNN_resp_v.py](./Neonatal_Seizure_Resnext_algorithm/score_tool_DNN_resp_v.py) |File for calculating AUC, AUC90 with post processing|
+| [score_tool_DNN_resp_v2.py](./Neonatal_Seizure_Resnext_algorithm/score_tool_DNN_resp_v2.py) |File for calculating AUC, AUC90 with post processing|
 
 | Folder                                                                                | Description |    
 |-------------------------------------------------------------------------------------|---|        
