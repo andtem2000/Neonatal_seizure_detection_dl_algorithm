@@ -1,6 +1,5 @@
-# 
 <h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">  
-  <br><br><strong>Neonatal seizure detection resnext algorithm</strong>  
+  <br><br><strong>Neonatal Seizure Detection Resnext Algorithm</strong>  
   
 </h1>  
 <h1 align="center">  
@@ -25,13 +24,13 @@ EEG signal and annotation files are given from the Helsinki publicly available d
   
 ## 2. Software requirements
 Python 3.8
-Tensorflow 2.3.0
+<br />Tensorflow 2.3.0
   
   
 ## 3. Software build
 Step 1: Get sources from GitHub 
 ```shell   
-$ git clone https://github.com/
+$ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
  
 ```  
   
