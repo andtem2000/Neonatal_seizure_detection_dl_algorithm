@@ -25,9 +25,6 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 import numpy as np
 from score_tool_DNN_resp_v import calc_roc
 import GetData_perfile_512_1_nz
-# from Callbacks_tcn_pp import CalculateAUC, BestAUC  # Callbacks with pp per epoch
-import random
-from sklearn.utils import class_weight
 from keras.utils import np_utils
 from keras.preprocessing.sequence import TimeseriesGenerator
 from keras.models import model_from_json
@@ -39,26 +36,14 @@ from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 from keras import initializers
 init = initializers.glorot_uniform(seed=717)
-from sklearn.utils import class_weight
-from keras.utils import to_categorical
-import time
-import scipy.io as sio
-# from Load_512res2_radam_resnext1 import res_net
-# from keras_radam import RAdam
 from keras.optimizers import Adam
-# os.environ['TF_KERAS'] = '1'
 filters = 32
-import pdb
 import time
 
-#from Load_Network import network
-from keras.optimizers import SGD
-
-# from Wma1 import crossval_mean_probability_fun
 
 start_time = time.time()
 epoch_length = 16
-window_size = 53 # AD orginally 61 but , 8 + (61-1) = 68, so 16 + (x-1) =68, so x = 53 for 16 sec window
+window_size = 53 # AD originally 61 but , 8 + (61-1) = 68, so 16 + (x-1) =68, so x = 53 for 16 sec window
 dataseries = 'Anser2 files'
 path_2 = '../'
 kernel = 5
@@ -170,7 +155,6 @@ def res_net(kernel = 5, filters = filter):
 
     model = Model(input_layer, output_layer)
     opt = Adam(lr=0.001, decay=1e-6)
-    # model.compile(loss='binary_crossentropy', optimizer=RAdam(), metrics=['accuracy'])
     model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
 
     return(model)
@@ -192,7 +176,6 @@ def crossval_mean_probability(baby, model, testX, testY):
     probs = []
     for loop in range(runs):
 
-        # saved_weigths_str = 'm_res512_radam_'
         path = '../Benchmark_weights/'
 
         if loop == 0:
@@ -202,7 +185,6 @@ def crossval_mean_probability(baby, model, testX, testY):
         if loop == 2:
             saved_weights_str = '/best_weights_balance_CV_r1_round2' + str(label) + '_epoch44.hdf5'
 
-        # model.load_weights(path + 'SavedWeights_' + results + saved_weights_str)
         model.load_weights(path + saved_weights_str)
 
         # p = model.predict_generator(data_gen)[:, 1]
@@ -216,17 +198,10 @@ def crossval_mean_probability(baby, model, testX, testY):
 
     return mean_probability
 
-#
-# json_file = open('m_res512_raug_resnext1_' +str(kernel) + str(label), 'r')
-# loaded_model_json = json_file.read()
-# json_file.close()
-# model = model_from_json(loaded_model_json)
+
 model = res_net(kernel = 5, filters=filters)
 
 print(model.summary())
-
-# load model weights
-
 # AnSEr 1 full list - 23 seizures
 file_list = ['024_AB', '025_AB', '027_AB', '029_A', '030_A', '031_A', '032_A',
        '033_AB', '037_AB', '042_A',  '047_A', '048_A', '051_AB',
@@ -239,27 +214,12 @@ file_list = ['024_AB', '025_AB', '027_AB', '029_A', '030_A', '031_A', '032_A',
        '532_AB', '546_AB', '554_A', '570_A', '572_A', '587_A',
        '590_A', '601_A', '620_A', '621_A', '622_A', '628_A', '630_A',
        '639_A', '647_AB', '657_A', '658_A', '710_A', '713_A', '722_A',
-       '730_AB', '734_A', '750_A', '751_A'] # '046_A', '273_A', # removed as no files
-#'545_A', '733_A', removed as as very poor performers on Vgg
+       '730_AB', '734_A', '750_A', '751_A']
 
 # file_list = ['029_A']
-# AnSEr 1 full list
-file_list = ['024_AB', '025_AB', '027_AB', '029_A', '030_A', '031_A', '032_A',
-             '033_AB', '037_AB', '042_A',  '047_A', '048_A', '051_AB',
-             '053_AB', '054_AB', '057_A', '061_A', '063_A', '064_A', '085_A',
-             '095_A', '096_AB', '102_A', '107_A', '116_A', '128_A', '142_AB',
-             '144_A', '153_AB', '180_A', '181_A', '225_AB', '226_AB', '231_AB',
-             '232_A', '233_A', '240_A',  '299_A', '307_A', '314_AB',
-             '326_A', '408_A', '411_AB', '418_A', '434_AB', '446_A', '452_A',
-             '460_AB', '465_A', '466_AB', '473_AB', '477_A', '506_AB', '529_A',
-             '532_AB', '546_AB', '554_A', '570_A', '572_A', '587_A',
-             '590_A', '601_A', '620_A', '621_A', '622_A', '628_A', '630_A',
-             '639_A', '647_AB', '657_A', '658_A', '710_A', '713_A', '722_A',
-             '730_AB', '734_A', '750_A', '751_A']
-             #'545_A', '733_A'] # '046_A', '273_A', # removed as no files
-#'545_A', '733_A', included here for inference,  removed in training as as very poor performers on Vgg
 
 file_list = ['029_A']
+# Anser 2 file
 file_list = ['41']
 
 probs_full = []
