@@ -1,7 +1,8 @@
 import numpy as np
-from enframe import enframe
-from polyarea import simpoly
-import pdb
+from Neonatal_Seizure_Resnext_algorithm.enframe import enframe
+from Neonatal_Seizure_Resnext_algorithm.polyarea import simpoly
+
+
 #D_val = sio.loadmat("D_val.mat")
 #D_val = D_val["D_val"][0]
 #epoch_map = sio.loadmat("epoch_map.mat")

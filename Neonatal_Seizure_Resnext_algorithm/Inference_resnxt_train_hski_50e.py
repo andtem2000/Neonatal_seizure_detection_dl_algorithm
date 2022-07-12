@@ -4,7 +4,7 @@ Created on Thu Jun 11 11:25:11 2020
 
 @author: Aengus.Daly
 This file is copied from dnet
-This file is for inference on Helsinki - training Helsinki
+This file is for inference on Anser1 - training 18 + HIE
 Now 3 runs
 resnext with kernel = 5
 LOO_res512_radam_aug_w_t2_gap_resnext_k5_mixup.py
@@ -23,12 +23,11 @@ import keras.backend as K
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 import numpy as np
-from score_tool_DNN_resp_v import calc_roc
-import GetData_perfile_512_1_hski
+from Neonatal_Seizure_Resnext_algorithm.score_tool_DNN_resp_v import calc_roc
+from Neonatal_Seizure_Resnext_algorithm import GetData_perfile_512_1_nz
 from keras.utils import np_utils
 from keras.preprocessing.sequence import TimeseriesGenerator
-from keras.models import model_from_json
-from keras.layers import Flatten, Input, BatchNormalization, Activation, Add, Cropping2D
+from keras.layers import Flatten, Input, Add, Cropping2D
 from keras.layers.core import Activation
 from keras.layers.convolutional import Conv2D, DepthwiseConv2D
 from keras.layers.pooling import AveragePooling2D, MaxPooling2D
@@ -36,19 +35,42 @@ from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 from keras import initializers
 init = initializers.glorot_uniform(seed=717)
-from keras.optimizers import Adam # RAdam used in training put inference here so Adam optimizer has no impact
+from keras.optimizers import Adam
+filters = 32
 import time
+
 
 start_time = time.time()
 epoch_length = 16
 window_size = 53 # AD originally 61 but , 8 + (61-1) = 68, so 16 + (x-1) =68, so x = 53 for 16 sec window
-eeg_channels = 18 # 18 for Helsinki files
-filters = 32
+dataseries = 'Anser2 files'
+path_2 = '../../'
 kernel = 5
-runs = 3
-path_2 = '../Helsinki files/'
 label = 'hski_mixupe_t50'
+runs = 3
 results = 'resnxt_hski_val'
+
+
+def get_files(baby, dataseries='Anser1 files'):
+    path = '../' + dataseries
+    # path_anns = path +str('/Anns_per_file_rename_files')
+    path_anns = path + str('/Anns_per_file')
+    path_Matlab = path + str('/Matlab_EEG_files')
+    file_anns = []
+    file_Matlab = []
+
+    for i in os.listdir(path_anns):
+        if os.path.isfile(os.path.join(path_anns, i)) and baby in i:
+            file_anns.append(i)
+            file_mat_name = i[:-15]+str('SIGNAL')
+            for q in os.listdir(path_Matlab):
+                if os.path.isfile(os.path.join(path_Matlab, q)) and file_mat_name in q:
+                    file_Matlab.append(q)
+
+    if len(file_anns) != len(file_Matlab):
+        print(' Anns not equal to Matlab no.',len(file_anns),len(file_Matlab), baby)
+
+    return file_anns, file_Matlab
 
 
 def movingaverage(data, window):
@@ -114,7 +136,7 @@ def build_model(input_layer, filters, init, kernel):
     x = Conv2D(filters=2, kernel_size=(2, 1), strides=(1, 1), activation="relu", padding='valid', kernel_initializer=init)(x)
     x = (AveragePooling2D(pool_size=(K.int_shape(x)[-3], 1), strides=(1, 1)))(x)
 
-    pool5 = MaxPooling2D(pool_size=(1, eeg_channels), strides=(1, 1))(x)
+    pool5 = MaxPooling2D(pool_size=(1, 8), strides=(1, 1))(x)
 
     pool5 = Activation(("softmax"))(pool5)
 
@@ -127,7 +149,7 @@ def build_model(input_layer, filters, init, kernel):
 
 def res_net(kernel = 5, filters = filter):
 
-    input_layer = Input((512, eeg_channels , 1))
+    input_layer = Input((512, 8 , 1))
     output_layer = build_model(input_layer, filters, init, kernel=kernel)
 
     model = Model(input_layer, output_layer)
@@ -153,7 +175,7 @@ def crossval_mean_probability(baby, model, testX, testY):
     probs = []
     for loop in range(runs):
 
-        path = './Benchmark_weights/'
+        path = '../Benchmark_weights/'
 
         if loop == 0:
             saved_weights_str = '/best_weights_balance_CV_r1_round0' +str(label) + '_epoch44.hdf5'
@@ -179,16 +201,39 @@ def crossval_mean_probability(baby, model, testX, testY):
 model = res_net(kernel = 5, filters=filters)
 
 print(model.summary())
+# AnSEr 1 full list - 23 seizures
+file_list = ['024_AB', '025_AB', '027_AB', '029_A', '030_A', '031_A', '032_A',
+       '033_AB', '037_AB', '042_A',  '047_A', '048_A', '051_AB',
+       '053_AB', '054_AB', '057_A', '061_A', '063_A', '064_A', '085_A',
+       '095_A', '096_AB', '102_A', '107_A', '116_A', '128_A', '142_AB',
+       '144_A', '153_AB', '180_A', '181_A', '225_AB', '226_AB', '231_AB',
+       '232_A', '233_A', '240_A',  '299_A', '307_A', '314_AB',
+       '326_A', '408_A', '411_AB', '418_A', '434_AB', '446_A', '452_A',
+       '460_AB', '465_A', '466_AB', '473_AB', '477_A', '506_AB', '529_A',
+       '532_AB', '546_AB', '554_A', '570_A', '572_A', '587_A',
+       '590_A', '601_A', '620_A', '621_A', '622_A', '628_A', '630_A',
+       '639_A', '647_AB', '657_A', '658_A', '710_A', '713_A', '722_A',
+       '730_AB', '734_A', '750_A', '751_A']
+
+# file_list = ['029_A']
+
+file_list = ['029_A']
+# Anser 2 file
+file_list = ['41']
 
 probs_full = []
 downsampled_y_full = []
 
-for baby in range(4,5): # total of 79 Helsinki files/babies, only doing infrence on 1 here
+for baby in file_list:
 
-    print('Test baby....', baby)
+    file_anns, file_Matlab = get_files(baby, dataseries)
+
+    Test = baby
+
+    print('Test baby....', Test)
     print("--- %.0f seconds ---" % (time.time() - start_time))
 
-    testX, testY = GetData_perfile_512_1_hski.getdatagen(baby, path_2)
+    testX, testY = GetData_perfile_512_1_nz.getdatagen(file_anns, file_Matlab, dataseries, path_2)
 
     probs = crossval_mean_probability(baby, model, testX, testY)
 

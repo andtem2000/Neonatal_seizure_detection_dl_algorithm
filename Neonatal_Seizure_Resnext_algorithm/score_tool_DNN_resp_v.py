@@ -1,8 +1,7 @@
 import numpy as np
-from enframe import enframe
-import pdb
-from polyarea import simpoly
-import scipy.io as sio
+from Neonatal_Seizure_Resnext_algorithm.enframe import enframe
+from Neonatal_Seizure_Resnext_algorithm.polyarea import simpoly
+
 avfilllength = 61 # AD this variable is not used
 # collar = 18 # for 8 seconds collar = 30 for 16 seconds = 26, for 32 seconds
 resp = 145*4 # AD this variable is used
