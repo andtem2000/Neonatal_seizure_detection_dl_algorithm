@@ -36,18 +36,18 @@ from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 from keras import initializers
 init = initializers.glorot_uniform(seed=717)
-from keras.optimizers import Adam
-filters = 32
+from keras.optimizers import Adam # RAdam used in training put inference here so Adam optimizer has no impact
 import time
-
 
 start_time = time.time()
 epoch_length = 16
 window_size = 53 # AD originally 61 but , 8 + (61-1) = 68, so 16 + (x-1) =68, so x = 53 for 16 sec window
-path_2 = '../Helsinki files/'
+eeg_channels = 18 # 18 for Helsinki files
+filters = 32
 kernel = 5
-label = 'hski_mixupe_t50'
 runs = 3
+path_2 = '../Helsinki files/'
+label = 'hski_mixupe_t50'
 results = 'resnxt_hski_val'
 
 
@@ -114,7 +114,7 @@ def build_model(input_layer, filters, init, kernel):
     x = Conv2D(filters=2, kernel_size=(2, 1), strides=(1, 1), activation="relu", padding='valid', kernel_initializer=init)(x)
     x = (AveragePooling2D(pool_size=(K.int_shape(x)[-3], 1), strides=(1, 1)))(x)
 
-    pool5 = MaxPooling2D(pool_size=(1, 8), strides=(1, 1))(x)
+    pool5 = MaxPooling2D(pool_size=(1, eeg_channels), strides=(1, 1))(x)
 
     pool5 = Activation(("softmax"))(pool5)
 
@@ -127,7 +127,7 @@ def build_model(input_layer, filters, init, kernel):
 
 def res_net(kernel = 5, filters = filter):
 
-    input_layer = Input((512, 8 , 1))
+    input_layer = Input((512, eeg_channels , 1))
     output_layer = build_model(input_layer, filters, init, kernel=kernel)
 
     model = Model(input_layer, output_layer)
@@ -183,7 +183,7 @@ print(model.summary())
 probs_full = []
 downsampled_y_full = []
 
-for baby in range(1,80): # total of 79 Helsinki files/babies
+for baby in range(4,5): # total of 79 Helsinki files/babies, only doing infrence on 1 here
 
     print('Test baby....', baby)
     print("--- %.0f seconds ---" % (time.time() - start_time))
