@@ -22,10 +22,10 @@ EEG signal and annotation files are given from the Helsinki publicly available d
 ---  
   
   
-## 2. Software requirements
+## 2. Software/Hardware requirements
 Python 3.8
 <br />Tensorflow 2.3.0
-  
+<br /> GPU is not required but code should run faster with one.  
   
 ## 3. Software build
 Step 1: Get sources from GitHub 
