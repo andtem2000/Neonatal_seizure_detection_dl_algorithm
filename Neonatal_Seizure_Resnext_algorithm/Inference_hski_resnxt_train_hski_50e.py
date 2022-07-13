@@ -25,7 +25,6 @@ os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 import numpy as np
 from Neonatal_Seizure_Resnext_algorithm.score_tool_DNN_resp_v2 import calc_roc
-from Neonatal_Seizure_Resnext_algorithm import GetData_perfile_512_1_hski
 from keras.utils import np_utils
 from keras.preprocessing.sequence import TimeseriesGenerator
 from keras.layers import Flatten, Input, Add, Cropping2D
