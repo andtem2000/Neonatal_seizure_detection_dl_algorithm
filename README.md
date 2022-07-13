@@ -51,7 +51,7 @@ $ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
 
 ## 5. EEG files
 
-The database of neonatal EEG used to develop the algorithms is available at DOI: 10.5281/zenodo.2547147 or https://zenodo.org/record/2547147 [1]
+The database of neonatal EEG used to develop the algorithm is available at DOI: 10.5281/zenodo.2547147 or https://zenodo.org/record/2547147 [1]
 
 
 ## 6. License
