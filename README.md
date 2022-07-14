@@ -1,5 +1,5 @@
 <h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">  
-  <br><br><strong>Neonatal Seizure Detection Resnext Algorithm</strong>  
+  <br><br><strong>Neonatal Seizure Detection ConvNet Algorithm</strong>  
   
 ---  
   ## Table of contents
@@ -16,7 +16,7 @@
 ---  
 ## 1. Introduction
   
-This is the python implementation code for running a neonatal seizure detection algorithm using deep learning.
+This is code for running a neonatal seizure detection algorithm using a deep learning convnet.
 EEG signal and annotation files are given from the Helsinki publicly available dataset.
   
 ---  
