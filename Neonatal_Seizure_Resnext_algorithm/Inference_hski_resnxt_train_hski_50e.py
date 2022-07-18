@@ -197,22 +197,25 @@ print(model.summary())
 probs_full = []
 downsampled_y_full = []
 
-for baby in range(hski_baby,hski_baby+1): # total of 79 Helsinki files/babies, only doing infrence on 1 here
 
-    print('Test baby....', baby)
+def inference(hski_file, eeg_file_path):
+
+    for baby in range(hski_file,hski_file+1): # total of 79 Helsinki files/babies, only doing infrence on 1 here
+
+        print('Test baby....', baby)
+        print("--- %.0f seconds ---" % (time.time() - start_time))
+
+        testX, testY = getdata(baby, eeg_file_path)
+
+        probs = mean_maf_probability(model, testX, testY, path = path_1)
+
+        probs_full = np.append(probs_full, probs)
+
+        downsampled_y = testY[::input_sampling_rate][:-epoch_length]
+        downsampled_y_full = np.append(downsampled_y_full, downsampled_y)
+
+    AUC = calc_roc(probs_full, downsampled_y_full, epoch_length=epoch_length) # Removed MAF
+    print('AUC %f, AUC90 %f' % (AUC))
+    print('runs', runs)
     print("--- %.0f seconds ---" % (time.time() - start_time))
-
-    testX, testY = getdata(baby, path_2)
-
-    probs = mean_maf_probability(model, testX, testY, path = path_1)
-
-    probs_full = np.append(probs_full, probs)
-
-    downsampled_y = testY[::input_sampling_rate][:-epoch_length]
-    downsampled_y_full = np.append(downsampled_y_full, downsampled_y)
-
-AUC = calc_roc(probs_full, downsampled_y_full, epoch_length=epoch_length) # Removed MAF
-print('AUC %f, AUC90 %f' % (AUC))
-print('runs', runs)
-print("--- %.0f seconds ---" % (time.time() - start_time))
-np.save('../Results/hski_rxt_ + '+ str(label) + '.npy', AUC)
+    np.save('../Results/hski_rxt_ + '+ str(label) + '.npy', AUC)
