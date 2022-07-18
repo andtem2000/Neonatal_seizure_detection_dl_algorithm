@@ -151,7 +151,7 @@ def res_net(kernel = 5, filters = filters):
     return(model)
 
 
-def crossval_mean_probability(model, testX, testY, path = path_1):
+def mean_maf_probability(model, testX, testY, path = path_1):
     """
     Getting the mean of three model training routine runs before the AUC is calculated.
     A moving average filter is applied.
@@ -202,7 +202,7 @@ for baby in range(hski_baby,hski_baby+1): # total of 79 Helsinki files/babies, o
 
     testX, testY = getdata(baby, path_2)
 
-    probs = crossval_mean_probability(model, testX, testY, path = path_1)
+    probs = mean_maf_probability(model, testX, testY, path = path_1)
 
     probs_full = np.append(probs_full, probs)
 
