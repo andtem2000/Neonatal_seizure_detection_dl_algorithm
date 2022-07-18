@@ -32,13 +32,15 @@ import time
 
 start_time = time.time()
 epoch_length = 16 # Lenght of input EEG signal in seconds
-window_size = 69 - epoch_length # 53 for 16 sec window, used in Moving Average Filter
+input_sampling_rate = 32 # 32 Hz is the input signal sampling rate after preprocessing
+input_length = epoch_length*input_sampling_rate # here it is 512
 eeg_channels = 18 # 18 for Helsinki files
 path_1 = '../Benchmark_weights/'
 path_2 = '../Helsinki files/'
 label = 'run_hski_1'
 hski_baby = 4
 runs = 3 # no. of sets of weights used.  This corresponds to the no. of training runs.
+window_size = 69 - epoch_length # 53 for 16 sec window, used in Moving Average Filter
 # Cannot change the following parameters in test
 filters = 32
 kernel = 5
@@ -56,11 +58,11 @@ def getdata(Baby,path_2 = '../Helsinki files/'):
         Y = np.where(Y == 3,1,0) # For consensus anns
     except:
         Y = []
-    if int(np.shape(X)[0]/32) != len(Y):
-        print('Anns length different to EEG length', len(X), int(np.shape(X)[0]/32))
+    if int(np.shape(X)[0]/input_sampling_rate) != len(Y):
+        print('Anns length different to EEG length', len(X), int(np.shape(X)[0]/input_sampling_rate))
 
-    trainY.extend(Y.repeat(32))
-    trainX.extend(X.reshape(len(X),18,1))
+    trainY.extend(Y.repeat(input_sampling_rate))
+    trainX.extend(X.reshape(len(X),eeg_channels,1))
 
     return trainX, trainY
 
@@ -141,7 +143,7 @@ def build_model(input_layer, filters, init, kernel):
 
 def res_net(kernel = 5, filters = filters):
 
-    input_layer = Input((512, eeg_channels , 1))
+    input_layer = Input((input_length, eeg_channels , 1))
     output_layer = build_model(input_layer, filters, init, kernel=kernel)
 
     model = Model(input_layer, output_layer)
@@ -164,7 +166,7 @@ def mean_maf_probability(model, testX, testY, path = path_1):
     """
 
     data_gen = TimeseriesGenerator(np.asarray(testX), np_utils.to_categorical(np.asarray(testY)),
-                                   length=512, sampling_rate=1, stride=32, batch_size=300, shuffle=False)
+                                   length=input_length, sampling_rate=1, stride=32, batch_size=300, shuffle=False)
     probs = []
     for loop in range(runs):
 
@@ -206,7 +208,7 @@ for baby in range(hski_baby,hski_baby+1): # total of 79 Helsinki files/babies, o
 
     probs_full = np.append(probs_full, probs)
 
-    downsampled_y = testY[::32][:-epoch_length]
+    downsampled_y = testY[::input_sampling_rate][:-epoch_length]
     downsampled_y_full = np.append(downsampled_y_full, downsampled_y)
 
 AUC = calc_roc(probs_full, downsampled_y_full, epoch_length=epoch_length) # Removed MAF
