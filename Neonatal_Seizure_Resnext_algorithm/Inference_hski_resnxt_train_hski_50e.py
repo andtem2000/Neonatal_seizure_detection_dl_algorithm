@@ -37,6 +37,7 @@ eeg_channels = 18 # 18 for Helsinki files
 filters = 32
 kernel = 5
 runs = 3
+path_1 = '../Benchmark_weights/'
 path_2 = '../Helsinki files/'
 label = 'run_hski_1'
 hski_baby = 4
@@ -149,32 +150,31 @@ def res_net(kernel = 5, filters = filter):
     return(model)
 
 
-def crossval_mean_probability(baby, model, testX, testY):
-    '''
-    Getting the mean of three model training routines before the AUC is calculated. The weights of 3 loops
-    (using different babies for validation) are loaded
-    :param baby: name of test baby
+def crossval_mean_probability(model, testX, testY, path = path_1):
+    """
+    Getting the mean of three model training routine runs before the AUC is calculated.
+    A moving average filter is applied.
+    The weights of 3 runs
     :param model: model architecture
     :param testX: the test EEG
     :param testY: the test labels
+    :param path: path to saved weights
     :return: the mean of 3 probabilities
-    '''
+    """
 
     data_gen = TimeseriesGenerator(np.asarray(testX), np_utils.to_categorical(np.asarray(testY)),
                                    length=512, sampling_rate=1, stride=32, batch_size=300, shuffle=False)
     probs = []
     for loop in range(runs):
 
-        path = '../Benchmark_weights/'
-
         if loop == 0:
-            saved_weights_str = '/best_weights_run0_hski_mixup.hdf5'
+            saved_weights_str = path + 'best_weights_run0_hski_mixup.hdf5'
         if loop == 1:
-            saved_weights_str = '/best_weights_run1_hski_mixup.hdf5'
+            saved_weights_str = path + 'best_weights_run1_hski_mixup.hdf5'
         if loop == 2:
-            saved_weights_str = '/best_weights_run2_hski_mixup.hdf5'
+            saved_weights_str = path + 'best_weights_run2_hski_mixup.hdf5'
 
-        model.load_weights(path + saved_weights_str)
+        model.load_weights(saved_weights_str)
 
         p = model.predict(data_gen)[:, 1]
         p = movingaverage(p, window_size)
@@ -201,7 +201,7 @@ for baby in range(hski_baby,hski_baby+1): # total of 79 Helsinki files/babies, o
 
     testX, testY = getdata(baby, path_2)
 
-    probs = crossval_mean_probability(baby, model, testX, testY)
+    probs = crossval_mean_probability(model, testX, testY, path = path_1)
 
     probs_full = np.append(probs_full, probs)
 
