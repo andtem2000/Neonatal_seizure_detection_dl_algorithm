@@ -1,17 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jun 11 11:25:11 2020
+Created on Fri Feb 11 11:25:11 2022
 
 @author: Aengus.Daly
-This file is copied from dnet
-This file is for inference on Helsinki - training Helsinki
-Now 3 runs
-resnext with kernel = 5
-LOO_res512_radam_aug_w_t2_gap_resnext_k5_mixup.py
-Anser1 with 23 seiz patients
-train form Ltrain_res512_resnxt_mixup_hski_iz_val_50.py
-dir dna2/Seiz_25
-Ltrain_hski_a1full2_resnxt_nz_k5_mixup_val50_Anser23.py
+
 """
 
 from numpy.random import seed
@@ -21,8 +13,8 @@ tf.random.set_seed(2)
 import os
 import scipy.io as sio
 import keras.backend as K
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ['CUDA_VISIBLE_DEVICES'] = '2'
+# os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID" # To be used for GPU use
+# os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 import numpy as np
 from Neonatal_Seizure_Resnext_algorithm.score_tool_DNN_resp_v2 import calc_roc
 from keras.utils import np_utils
@@ -46,8 +38,8 @@ filters = 32
 kernel = 5
 runs = 3
 path_2 = '../Helsinki files/'
-label = 'hski_mixupe_t50'
-results = 'resnxt_hski_val'
+label = 'run_hski_1'
+hski_baby = 4
 
 
 def getdata(Baby,path_2 = '../Helsinki files/'):
@@ -151,7 +143,7 @@ def res_net(kernel = 5, filters = filter):
     output_layer = build_model(input_layer, filters, init, kernel=kernel)
 
     model = Model(input_layer, output_layer)
-    opt = Adam(lr=0.001, decay=1e-6)
+    opt = Adam(lr=0.001, decay=1e-6) # This is not training only inference so these parameters need not be changed
     model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
 
     return(model)
@@ -176,15 +168,14 @@ def crossval_mean_probability(baby, model, testX, testY):
         path = '../Benchmark_weights/'
 
         if loop == 0:
-            saved_weights_str = '/best_weights_balance_CV_r1_round0' +str(label) + '_epoch44.hdf5'
+            saved_weights_str = '/best_weights_run0_hski_mixup.hdf5'
         if loop == 1:
-            saved_weights_str = '/best_weights_balance_CV_r1_round1' + str(label) + '_epoch49.hdf5'
+            saved_weights_str = '/best_weights_run1_hski_mixup.hdf5'
         if loop == 2:
-            saved_weights_str = '/best_weights_balance_CV_r1_round2' + str(label) + '_epoch44.hdf5'
+            saved_weights_str = '/best_weights_run2_hski_mixup.hdf5'
 
         model.load_weights(path + saved_weights_str)
 
-        # p = model.predict_generator(data_gen)[:, 1]
         p = model.predict(data_gen)[:, 1]
         p = movingaverage(p, window_size)
 
@@ -203,7 +194,7 @@ print(model.summary())
 probs_full = []
 downsampled_y_full = []
 
-for baby in range(4,5): # total of 79 Helsinki files/babies, only doing infrence on 1 here
+for baby in range(hski_baby,hski_baby+1): # total of 79 Helsinki files/babies, only doing infrence on 1 here
 
     print('Test baby....', baby)
     print("--- %.0f seconds ---" % (time.time() - start_time))
@@ -214,11 +205,11 @@ for baby in range(4,5): # total of 79 Helsinki files/babies, only doing infrence
 
     probs_full = np.append(probs_full, probs)
 
-    downsampled_y = testY[::32][:-16]
+    downsampled_y = testY[::32][:-epoch_length]
     downsampled_y_full = np.append(downsampled_y_full, downsampled_y)
 
 AUC = calc_roc(probs_full, downsampled_y_full, epoch_length=epoch_length) # Removed MAF
 print('AUC %f, AUC90 %f' % (AUC))
 print('runs', runs)
 print("--- %.0f seconds ---" % (time.time() - start_time))
-np.save('../Results/Anser1_hski_rxt_Anser2_' +str(kernel) + str(label) + 'AUC.npy', AUC)
+np.save('../Results/hski_rxt_ + '+ str(label) + '.npy', AUC)
