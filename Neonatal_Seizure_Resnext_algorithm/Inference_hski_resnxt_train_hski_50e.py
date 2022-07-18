@@ -31,16 +31,17 @@ from keras.optimizers import Adam # RAdam used in training put inference here so
 import time
 
 start_time = time.time()
-epoch_length = 16
-window_size = 53 # AD originally 61 but , 8 + (61-1) = 68, so 16 + (x-1) =68, so x = 53 for 16 sec window
+epoch_length = 16 # Lenght of input EEG signal in seconds
+window_size = 69 - epoch_length # 53 for 16 sec window, used in Moving Average Filter
 eeg_channels = 18 # 18 for Helsinki files
-filters = 32
-kernel = 5
-runs = 3
 path_1 = '../Benchmark_weights/'
 path_2 = '../Helsinki files/'
 label = 'run_hski_1'
 hski_baby = 4
+runs = 3 # no. of sets of weights used.  This corresponds to the no. of training runs.
+# Cannot change the following parameters in test
+filters = 32
+kernel = 5
 
 
 def getdata(Baby,path_2 = '../Helsinki files/'):
@@ -138,7 +139,7 @@ def build_model(input_layer, filters, init, kernel):
 
 # Model
 
-def res_net(kernel = 5, filters = filter):
+def res_net(kernel = 5, filters = filters):
 
     input_layer = Input((512, eeg_channels , 1))
     output_layer = build_model(input_layer, filters, init, kernel=kernel)
