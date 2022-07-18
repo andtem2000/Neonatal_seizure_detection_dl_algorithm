@@ -97,7 +97,7 @@ def fe_block(block_input, filters, init):
     return norm1
 
 
-def fe_block_dep(block_input, filters, init, dm = 1, kernel=3):
+def fe_block_dep(block_input, filters, init, dm = 1, kernel=5):
 
     pad = 'valid'
     adj = int((kernel-3)/2)
