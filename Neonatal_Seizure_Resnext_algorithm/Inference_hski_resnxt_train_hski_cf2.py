@@ -29,24 +29,24 @@ from keras import initializers
 init = initializers.glorot_uniform(seed=717)
 from keras.optimizers import Adam # RAdam used in training put inference here so Adam optimizer has no impact
 import time
+from config_1 import *
 
 start_time = time.time()
-epoch_length = 16 # Lenght of input EEG signal in seconds
-input_sampling_rate = 32 # 32 Hz is the input signal sampling rate after preprocessing
-input_length = epoch_length*input_sampling_rate # here it is 512
-eeg_channels = 18 # 18 for Helsinki files
-path_1 = '../Benchmark_weights/'
-path_2 = '../Helsinki files/'
-label = 'run_hski_1'
-hski_baby = 4
-runs = 3 # no. of sets of weights used.  This corresponds to the no. of training runs.
-window_size = 69 - epoch_length # 53 for 16 sec window, used in Moving Average Filter
-# Cannot change the following parameters in test
-filters = 32
-kernel = 5
+# epoch_length = 16 # Lenght of input EEG signal in seconds
+# input_sampling_rate = 32 # 32 Hz is the input signal sampling rate after preprocessing
+# input_length = epoch_length*input_sampling_rate # here it is 512
+# eeg_channels = 18 # 18 for Helsinki files
+# path_1 = '../Benchmark_weights/'
+# path_2 = '../Helsinki files/'
+# label = 'run_hski_1'
+# hski_baby = 4
+# runs = 3 # no. of sets of weights used.  This corresponds to the no. of training runs.
+# window_size = 69 - epoch_length # 53 for 16 sec window, used in Moving Average Filter
+# # Cannot change the following parameters in test
+# filters = 32
 
 
-def getdata(Baby,path_2 = '../Helsinki files/'):
+def getdata(Baby, path_2, input_sampling_rate, eeg_channels):
 
     trainX = []
     trainY = []
@@ -67,15 +67,15 @@ def getdata(Baby,path_2 = '../Helsinki files/'):
     return trainX, trainY
 
 
-def movingaverage(data, window):
+def movingaverage(data, window_size):
     '''
 
     :param data: the vector which the MAF will be applied to
-    :param window: the size of the moving average window
+    :param window_size: the size of the moving average window
     :return: data after the MAF has been applied
     '''
     data = data
-    window = np.ones(int(window)) / float(window_size)
+    window = np.ones(int(window_size)) / float(window_size)
     return np.convolve(data, window, "same")
 
 
@@ -114,7 +114,7 @@ def fe_block_dep(block_input, filters, init, dm = 1, kernel=5):
     return norm1
 
 
-def build_model(input_layer, filters, init, kernel):
+def build_model(input_layer, filters, init, kernel,eeg_channels):
 
     x = fe_block(input_layer, filters, init)
     x = AveragePooling2D(pool_size=(4, 1), strides=(3, 1))(x)
@@ -141,10 +141,10 @@ def build_model(input_layer, filters, init, kernel):
 
 # Model
 
-def res_net(kernel = 5, filters = filters):
+def res_net(kernel, filters, eeg_channels, input_length):
 
     input_layer = Input((input_length, eeg_channels , 1))
-    output_layer = build_model(input_layer, filters, init, kernel=kernel)
+    output_layer = build_model(input_layer, filters, init, kernel=kernel, eeg_channels=eeg_channels)
 
     model = Model(input_layer, output_layer)
     opt = Adam(lr=0.001, decay=1e-6) # This is not training only inference so these parameters need not be changed
@@ -153,7 +153,7 @@ def res_net(kernel = 5, filters = filters):
     return(model)
 
 
-def mean_maf_probability(model, testX, testY, path = path_1):
+def mean_maf_probability(model, testX, testY, path, input_length, runs, window_size):
     """
     Getting the mean of three model training routine runs before the AUC is calculated.
     A moving average filter is applied.
@@ -180,7 +180,7 @@ def mean_maf_probability(model, testX, testY, path = path_1):
         model.load_weights(saved_weights_str)
 
         p = model.predict(data_gen)[:, 1]
-        p = movingaverage(p, window_size)
+        p = movingaverage(data= p, window_size=window_size)
 
         probs.append(p)
 
@@ -189,25 +189,38 @@ def mean_maf_probability(model, testX, testY, path = path_1):
 
     return mean_probability
 
+if __name__ == '__main__':
+    # LOGGER.info("Script started...")
 
-model = res_net(kernel = 5, filters=filters)
+    # hski_baby = config_1.hski_baby
+    # hski_baby_num = config_1.hski_baby_num
+    # path_weights = config_1.path_weights
+    # path_test_files = config_1.path_test_files
+    # path_results = config_1.path_results
+    # filters = config_1.filters
+    # runs = config_1.runs
+    # results_name = config_1.results_name
+    # eeg_channels = config_1.eeg_channels
+    # input_sampling_rate = config_1.input_sampling_rate
+    # epoch_length = config_1.epoch_length
+    # window_size = config_1.window_size
 
-print(model.summary())
 
-probs_full = []
-downsampled_y_full = []
+    probs_full = []
+    downsampled_y_full = []
 
-
-def inference(hski_file, eeg_file_path):
-
-    for baby in range(hski_file,hski_file+1): # total of 79 Helsinki files/babies, only doing infrence on 1 here
+    for baby in range(hski_baby,hski_baby+hski_baby_num): # total of 79 Helsinki files/babies, only doing inference on 1 here
 
         print('Test baby....', baby)
         print("--- %.0f seconds ---" % (time.time() - start_time))
 
-        testX, testY = getdata(baby, eeg_file_path)
+        testX, testY = getdata(baby, path_2 = path_test_files, input_sampling_rate=input_sampling_rate,eeg_channels=eeg_channels)
 
-        probs = mean_maf_probability(model, testX, testY, path = path_1)
+        model = res_net(kernel=5, filters=filters, eeg_channels=eeg_channels, input_length=epoch_length*input_sampling_rate)
+
+        print(model.summary())
+
+        probs = mean_maf_probability(model, testX, testY, path = path_weights, input_length=epoch_length*input_sampling_rate, runs=runs, window_size=window_size)
 
         probs_full = np.append(probs_full, probs)
 
@@ -218,4 +231,4 @@ def inference(hski_file, eeg_file_path):
     print('AUC %f, AUC90 %f' % (AUC))
     print('runs', runs)
     print("--- %.0f seconds ---" % (time.time() - start_time))
-    np.save('../Results/hski_rxt_ + '+ str(label) + '.npy', AUC)
+    np.save(str(path_results) + str(results_name) + '.npy', AUC)
