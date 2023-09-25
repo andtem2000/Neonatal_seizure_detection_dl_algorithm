@@ -9,10 +9,11 @@
 3. [Software build](#software-build)  
 4. [File description](#File-descriptions)
 5. [EEG files](#EEG-files)
-6. [License](#License)
-7. [Authors](#Authors)
-8. [References](#References)
-9. [Contact](#Contact)
+6. [Instructions for Use](#InstructionsforUse)
+8. [License](#License)
+9. [Authors](#Authors)
+10. [References](#References)
+11. [Contact](#Contact)
 
 ---  
 ## 1. Introduction
@@ -54,16 +55,17 @@ $ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
 
 The database of neonatal EEG used to develop the algorithm is available at DOI: 10.5281/zenodo.2547147 or https://zenodo.org/record/2547147 [1]
 
+## 6. Instructions for Use
 
-## 6. License
+## 7. License
 
-## 7. Authors
+## 8. Authors
 Aengus Daly, Gordon Lightbody, Andriy Temko
 
-## 8. References
+## 9. References
 [1]  Nathan Stevenson, Karoliina Tapani, Leena Lauronenand Sampsa Vanhatalo, “A dataset of neonatal EEG recordings with seizures annotations”. Zenodo, Jun. 05, 2018. doi: 10.5281/zenodo.2547147.
 
-## 9. Contact
+## 10. Contact
 
 Aengus Daly 
 <br /> Munster Technological University,
