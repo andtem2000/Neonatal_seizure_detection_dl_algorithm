@@ -1,5 +1,5 @@
 <h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">  
-  <br><br><strong>Neonatal Seizure Detection ConvNet Algorithm</strong>  
+  <br><br><strong>Neo_Net - Neonatal Seizure Detection ConvNet Algorithm</strong>  
   
 ---  
   ## Table of contents
@@ -16,8 +16,8 @@
 ---  
 ## 1. Introduction
   
-This is code for running a neonatal seizure detection algorithm using a deep learning convnet.
-EEG signal and annotation files are given from the Helsinki publicly available dataset.
+This respository contains code for a deep learnning neonatal seizure detection algorithm using EEG signals as input.  It is based on the published paper -link.
+Details of how the algorithm can be run are given below using the publicly available Helsinki EEG dataset.
   
 ---  
   
@@ -25,7 +25,7 @@ EEG signal and annotation files are given from the Helsinki publicly available d
 ## 2. Software/Hardware requirements
 Python 3.8
 <br />Tensorflow 2.3.0
-<br /> GPU is not required but code should run faster with one.  
+<br /> GPU is not necessary.  
   
 ## 3. Software build
 Step 1: Get sources from GitHub 
