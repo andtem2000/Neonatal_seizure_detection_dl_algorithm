@@ -1,5 +1,6 @@
 <h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">  
-  <br><br><strong>Neo_Net - Neonatal Seizure Detection ConvNet Algorithm</strong>  
+  <br><br><strong>NeoNateNet</strong>
+  <br><br><strong>Neonatal Seizure Detection Algorithm</strong>
   
 ---  
   ## Table of contents
