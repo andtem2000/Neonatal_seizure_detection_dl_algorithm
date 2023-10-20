@@ -18,7 +18,7 @@
 ---  
 ## 1. Introduction
   
-This respository contains code for a deep learnning neonatal seizure detection algorithm using EEG signals as input.  It is based on the published paper -link.
+This repository contains code for a deep learning neonatal seizure detection algorithm using EEG signals as input.  It is based on the published paper -link.
 Details of how the algorithm can be run are given below using the publicly available Helsinki EEG dataset.
   
 ---  
@@ -39,15 +39,16 @@ $ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
 ## 4. File descriptions
   
 
-| File                                                                                | Description |    
-|-------------------------------------------------------------------------------------|---|        
-| [Inference_hski_resnxt_train_hski_50e.py](./Neonatal_Seizure_Resnext_algorithm/Inference_hski_resnxt_train_hski_50e.py)             | Main file for seizure detection|
-| [score_tool_DNN_resp_v2.py](./Neonatal_Seizure_Resnext_algorithm/score_tool_DNN_resp_v2.py) |File for calculating AUC, AUC90 with post processing|
+| Files                                  | Description                                                       |    
+|----------------------------------------|-------------------------------------------------------------------|        
+| [Main_Inference.py](Main_Inference.py) | Main file for running seizure detection model                     |
+| [congif_1.py](Config_1.py)             | Configuration file |
 
-| Folder                                                                                | Description |    
-|-------------------------------------------------------------------------------------|---|        
-| [Benchmark_weights](./Benchmark_weights)             | Contains 3 sets of weights for the resnext model|
-| [Helsinki files](./Helsinki_files) |Contains EEG signal files and annotations|
+| Folder                                   | Description                                       |    
+|------------------------------------------|---------------------------------------------------|        
+| [Benchmark_weights](./Benchmark_weights) | Contains 3 sets of weights for the resnext model  |
+| [EEG files](./EEG_files)                 | EEG signal files and annotations                  |
+| [Utils](./Utils)                         | Model code, Inference calcs, Post Processing etc. |
 
 
 
