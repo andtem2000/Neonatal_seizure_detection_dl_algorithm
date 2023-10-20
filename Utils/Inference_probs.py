@@ -17,7 +17,7 @@ def movingaverage(data, epoch_length):
     return np.convolve(data, window, "same")
 
 
-def mean_maf_probability(model, testX, testY, path, runs, input_length, epoch_length):
+def mean_maf_probability(model, testX, path, runs, input_length, epoch_length):
     """
     Getting the mean of three model training routine runs before the AUC is calculated.
     A moving average filter is applied.
@@ -28,7 +28,7 @@ def mean_maf_probability(model, testX, testY, path, runs, input_length, epoch_le
     :param path: path to saved weights
     :return: the mean of 3 probabilities
     """
-
+    testY = np.ones((len(testX)))
     data_gen = TimeseriesGenerator(np.asarray(testX), np_utils.to_categorical(np.asarray(testY)),
                                    length=input_length, sampling_rate=1, stride=32, batch_size=300, shuffle=False)
     probs = []

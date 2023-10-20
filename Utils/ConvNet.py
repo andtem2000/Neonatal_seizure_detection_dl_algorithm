@@ -6,9 +6,10 @@ from keras.layers.core import Activation
 from keras.layers.convolutional import Conv2D, DepthwiseConv2D
 from keras.layers.pooling import AveragePooling2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization
+filters_size = 32 # Cannot change the following parameters in test
+kernel_size = 5
 
-
-def fe_block(block_input, filters, init):
+def fe_block(block_input,filters, init):
 
     pad = 'valid'
 
@@ -26,7 +27,7 @@ def fe_block(block_input, filters, init):
     return norm1
 
 
-def fe_block_dep(block_input, filters, init, dm = 1, kernel=5):
+def fe_block_dep(block_input,filters, init, dm=1, kernel=kernel_size):
 
     pad = 'valid'
     adj = int((kernel-3)/2)
@@ -43,7 +44,7 @@ def fe_block_dep(block_input, filters, init, dm = 1, kernel=5):
     return norm1
 
 
-def build_model(input_layer, filters, init, kernel, eeg_channels):
+def build_model(input_layer, init, eeg_channels,filters = filters_size,kernel=kernel_size):
 
     x = fe_block(input_layer, filters, init)
     x = AveragePooling2D(pool_size=(4, 1), strides=(3, 1))(x)
