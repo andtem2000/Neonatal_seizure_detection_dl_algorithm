@@ -46,9 +46,9 @@ $ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
 
 | Folder                                   | Description                                       |    
 |------------------------------------------|---------------------------------------------------|        
-| [Benchmark_weights](./Benchmark_weights) | Contains 3 sets of weights for the resnext model  |
+| [Benchmark_weights](./Benchmark_weights) | Contains 3 sets of weights for the model          |
 | [EEG files](./EEG_files)                 | EEG signal files and annotations                  |
-| [Utils](./Utils)                         | Model code, Inference calcs, Post Processing etc. |
+| [Utils](./Utils)                         | Model code, inference calcs, post processing etc. |
 
 
 
