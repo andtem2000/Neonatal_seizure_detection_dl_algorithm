@@ -6,24 +6,12 @@ Created on Fri Feb 11 11:25:11 2022
 
 """
 
-from numpy.random import seed
-seed(1)
-import tensorflow as tf
-tf.random.set_seed(2)
 import os
 import scipy.io as sio
-import keras.backend as K
 # os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID" # To be used for GPU use
 # os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 import numpy as np
-from Utils.Post_processing_AUC_calc import calc_roc
-from keras.utils import np_utils
-from keras.preprocessing.sequence import TimeseriesGenerator
-from keras.layers import Flatten, Input, Add, Cropping2D
-from keras.layers.core import Activation
-from keras.layers.convolutional import Conv2D, DepthwiseConv2D
-from keras.layers.pooling import AveragePooling2D, MaxPooling2D
-from keras.layers.normalization import BatchNormalization
+from keras.layers import Input
 from keras.models import Model
 from keras import initializers
 init = initializers.glorot_uniform(seed=717)
@@ -32,6 +20,7 @@ import time
 import config_1 as cfg
 from Utils.ConvNet import build_model
 from Utils.Inference_probs import mean_maf_probability
+from Utils.Post_processing_AUC_calc import calc_roc
 
 start_time = time.time()
 
