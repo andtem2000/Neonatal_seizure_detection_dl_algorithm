@@ -17,7 +17,7 @@
 
 ---  
 ## 1. Introduction
-  
+
 This repository contains code for a deep learning neonatal seizure detection algorithm using EEG signals as input.  It is based on the published paper -link.
 Details of how the algorithm can be run are given below using the publicly available Helsinki EEG dataset.
   

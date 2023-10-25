@@ -81,5 +81,5 @@ def res_net(eeg_channels,input_length):
     model = Model(input_layer, output_layer)
     opt = Adam(lr=0.001, decay=1e-6) # This is not training only inference so these parameters need not be changed
     model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
-
+    model._name = "ConvNet"
     return(model)
