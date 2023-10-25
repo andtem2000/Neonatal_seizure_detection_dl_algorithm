@@ -35,11 +35,11 @@ def mean_maf_probability(model, testX, path, runs, input_length, epoch_length):
     for loop in range(runs):
 
         if loop == 0:
-            saved_weights_str = path + 'best_weights_run0_hski_mixup.hdf5'
+            saved_weights_str = path + 'best_weights_run0_hski_trained.hdf5'
         if loop == 1:
-            saved_weights_str = path + 'best_weights_run1_hski_mixup.hdf5'
+            saved_weights_str = path + 'best_weights_run1_hski_trained.hdf5'
         if loop == 2:
-            saved_weights_str = path + 'best_weights_run2_hski_mixup.hdf5'
+            saved_weights_str = path + 'best_weights_run2_hski_trained.hdf5'
 
         model.load_weights(saved_weights_str)
 

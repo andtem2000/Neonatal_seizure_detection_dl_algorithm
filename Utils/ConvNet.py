@@ -1,13 +1,17 @@
-'''Main model file'''
+'''File with functions to generate the ConvNet_model.keras file'''
 
-import keras.backend as K
+import keras.backend as k
 from keras.layers import Flatten, Input, Add, Cropping2D
 from keras.layers.core import Activation
 from keras.layers.convolutional import Conv2D, DepthwiseConv2D
 from keras.layers.pooling import AveragePooling2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization
+from keras.models import Model, load_model
+from keras import initializers
+from keras.optimizers import Adam # RAdam used in training put inference here so Adam optimizer has no impact
 filters_size = 32 # Cannot change the following parameters in test
 kernel_size = 5
+init = initializers.glorot_uniform(seed=717)
 
 def fe_block(block_input,filters, init):
 
@@ -58,7 +62,7 @@ def build_model(input_layer, init, eeg_channels,filters = filters_size,kernel=ke
     x = fe_block_dep(x, filters, init, dm=2, kernel=kernel)
 
     x = Conv2D(filters=2, kernel_size=(2, 1), strides=(1, 1), activation="relu", padding='valid', kernel_initializer=init)(x)
-    x = (AveragePooling2D(pool_size=(K.int_shape(x)[-3], 1), strides=(1, 1)))(x)
+    x = (AveragePooling2D(pool_size=(k.int_shape(x)[-3], 1), strides=(1, 1)))(x)
 
     pool5 = MaxPooling2D(pool_size=(1, eeg_channels), strides=(1, 1))(x)
 
@@ -67,3 +71,15 @@ def build_model(input_layer, init, eeg_channels,filters = filters_size,kernel=ke
     output_layer = Flatten()(pool5)
 
     return output_layer
+
+
+def res_net(eeg_channels,input_length):
+
+    input_layer = Input((input_length, eeg_channels , 1))
+    output_layer = build_model(input_layer, init, eeg_channels=eeg_channels)
+
+    model = Model(input_layer, output_layer)
+    opt = Adam(lr=0.001, decay=1e-6) # This is not training only inference so these parameters need not be changed
+    model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
+
+    return(model)
