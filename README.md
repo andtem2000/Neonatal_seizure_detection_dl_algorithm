@@ -18,12 +18,12 @@
 ---  
 ## 1. Introduction
 
-This repository contains code for a deep learning neonatal seizure detection algorithm using EEG signals as input.  It is based on the published paper -link.
-Details of how the algorithm can be run are given below using the publicly available Helsinki EEG dataset.
-  
+This repository contains instructions for use and code for running a neonatal seizure detection deep learning algorithm using EEG signals as input.
+
+<br /> It is based on the published paper -link.
+ 
 ---  
-  
-  
+   
 ## 2. Software/Hardware requirements
 Python 3.8
 <br />Tensorflow 2.3.0
@@ -42,14 +42,13 @@ $ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
 | Files                                  | Description                                       |    
 |----------------------------------------|---------------------------------------------------|        
 | [Main_Inference.py](Main_Inference.py) | Main file for running seizure detection algorithm |
-| [config_1.py](Config_1.py)             | Configuration file                                |
 
-| Folder                                   | Description                                       |    
-|------------------------------------------|---------------------------------------------------|        
-| [Benchmark_weights](./Benchmark_weights) | Contains 3 sets of weights for the model          |
-| [EEG files](./EEG_files)                 | EEG signal files and annotations                  |
-| [Utils](./Utils)                         | Model code, inference calcs, post processing etc. |
-
+| Folder                                   | Description                                                                                 |    
+|------------------------------------------|---------------------------------------------------------------------------------------------|        
+| [Benchmark_weights](./Benchmark_weights) | Contains 3 weights files for the model; generated using 3 different seeds in training.      |
+| [EEG files](./EEG_files)                 | EEG signal files; example files are given from the publicly available Helskinki dataset [1] |
+| [Results](./Results)                     | Folder for results; example results are given for the example EEG files.                    |
+| [Utils](./Utils)                         | Contains the ConvNet.py file to create keras model and once created saves the file here.    |
 
 
 ## 5. EEG files

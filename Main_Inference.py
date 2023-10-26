@@ -77,7 +77,7 @@ def inference():
         print("--- %.0f seconds ---" % (time.time() - start_time))
 
         testx, no_eeg_channels = getdata(baby, eeg_file_path)
-        if os.path.isfile(model_path) == True:  # compile and save model file if it does not exist
+        if os.path.isfile(model_path) == False:  # compile and save model file if it does not exist
             model = res_net(no_eeg_channels,input_length=epoch_length*input_sampling_rate)
             model.save(model_path)
         model = load_model(model_path)
