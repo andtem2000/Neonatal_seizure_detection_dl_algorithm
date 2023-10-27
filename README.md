@@ -63,7 +63,7 @@ and are preprocessed as detailed below and described in the paper [1].
 ### EEG signal input file specifications
 The input EEG files need to be in .mat format, a matrix of N by M, where N is the EEG signal data and M is the number of EEG channels in a bipolar montage.
 <br /> The bipolar montage used, including order, in training and inference are given in [1] and [2], other bipolar configurations can be tested. 
-<br /> EEG signal data, used in training and inference, was 32Hz sampling rate following pre-processing by a DC notch filter and 0.5-12.8 bandwidth anti-aliasing filter.
+<br /> EEG signal data, used in training and inference, was 32Hz sampling rate following preprocessing by a DC notch filter and 0.5-12.8 bandwidth anti-aliasing filter.
 
 ### Adjustable parameters in [Main_Inference.py](Main_Inference.py)
 These are the main parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training and inference, are also given here.
