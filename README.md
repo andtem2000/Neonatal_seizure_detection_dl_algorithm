@@ -69,11 +69,11 @@ These are the main parameters can be adjusted by the user and are situated at th
 
 | Parameter           | Description                                                                                                  |    
 |---------------------|--------------------------------------------------------------------------------------------------------------|        
-| file_list           | List of EEG signal files names to be input and these files should be located in [EEG files](./EEG_files)     
+| file_list           | List of EEG signal files names to be input; these files should be located in [EEG files](./EEG_files)     
 |                     | e.g. ["eeg1_SIGNAL.mat", "eeg4_SIGNAL.mat"]                                                                  |
 | epoch_length        | Epoch/window input length of the EEG signal, in seconds                                                      |
 |                     | Default is 16                                                                                                |
-| epoch_shift         | Epoch/window shift of EEG signal input, in seconds                                                           
+| epoch_shift         | Epoch/window input shift of EEG signal, in seconds                                                           
 |                     | Default is 1                                                                                                 |
 | input_sampling_rate | EEG input signal sampling rate in Hz                                                                         |
 |                     | Default is 32                                                                                                |
@@ -82,7 +82,7 @@ These are the main parameters can be adjusted by the user and are situated at th
 | maf_window_size     | Used in the moving average filter (maf) applied to the probabilities before output                           |
 |                     | Default is  69 - epoch_length, i.e. 53 for 16 sec window                                                     |
 
-Further details are given in the paper [1]
+Further details can be found in the paper [1]
 ___
 
 ## 7. License
@@ -91,7 +91,7 @@ ___
 Aengus Daly, Gordon Lightbody, Andriy Temko
 ___
 ## 9. References
-[1]  Nathan Stevenson, Karoliina Tapani, Leena Lauronenand Sampsa Vanhatalo, “A dataset of neonatal EEG recordings with seizures annotations”. Zenodo, Jun. 05, 2018. doi: 10.5281/zenodo.2547147.
+[2]  Nathan Stevenson, Karoliina Tapani, Leena Lauronenand Sampsa Vanhatalo, “A dataset of neonatal EEG recordings with seizures annotations”. Zenodo, Jun. 05, 2018. doi: 10.5281/zenodo.2547147.
 ___
 ## 10. Contact
 
