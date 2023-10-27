@@ -59,28 +59,29 @@ ___
 The main file to run the algorithm is [Main_Inference.py](Main_Inference.py).  
 <br />  The probabilities of a seizure per second of inputted EEG signal are outputted by the algorithm in .npy format to the [Results](./Results) folder.
 <br />  You can run this main file using the EEG files given with this repository which are from the Helsinki publicly available dataset [2]
-and are preprocessed as detailed below and as per the paper [1].
+and are preprocessed as detailed below and described in the paper [1].
 ### EEG signal input file specifications
-The input EEG files need to be in .mat format, a matrix of N by M, where N is the EEG signal data and M is the number of EEG channels in the bipolar montage (TODO what montage expected, order does not play a role, etc); 
+The input EEG files need to be in .mat format, a matrix of N by M, where N is the EEG signal data and M is the number of EEG channels in a bipolar montage.
+<br /> The bipolar montage used, including order, in training and inference are given in [1] and [2], other bipolar configurations can be tested. 
 <br /> EEG signal data, used in training and inference, was 32Hz sampling rate following a DC notch filter and 0.5-12.8 bandwidth anti-aliasing filtering.
 
 ### Adjustable parameters in [Main_Inference.py](Main_Inference.py)
-These are the main parameters can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training and inference, are given here.
+These are the main parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training and inference, are also given here.
 
-| Parameter           | Description                                                                                                  |    
-|---------------------|--------------------------------------------------------------------------------------------------------------|        
-| file_list           | List of EEG signal files names to be input; these files should be located in [EEG files](./EEG_files)     
-|                     | e.g. ["eeg1_SIGNAL.mat", "eeg4_SIGNAL.mat"]                                                                  |
-| epoch_length        | Epoch/window input length of the EEG signal, in seconds                                                      |
-|                     | Default is 16                                                                                                |
-| epoch_shift         | Epoch/window input shift of EEG signal, in seconds                                                           
-|                     | Default is 1                                                                                                 |
-| input_sampling_rate | EEG input signal sampling rate in Hz                                                                         |
-|                     | Default is 32                                                                                                |
-| runs                | No. of model weights used; weights were generated via 3 different random initializations during training runs 
-|                     | Default is 3                                                                                                 
-| maf_window_size     | Used in the moving average filter (maf) applied to the probabilities before output                           |
-|                     | Default is  69 - epoch_length, i.e. 53 for 16 sec window                                                     |
+| Parameter           | Description                                                                                                    |    
+|---------------------|----------------------------------------------------------------------------------------------------------------|        
+| file_list           | List of EEG signal files names to be input; these files should be located in [EEG files](./EEG_files).         
+|                     | e.g. ["eeg1_SIGNAL.mat", "eeg4_SIGNAL.mat"]                                                                    |
+| epoch_length        | Epoch/window length of the EEG input signal, in seconds.                                                       |
+|                     | Default is 16                                                                                                  |
+| epoch_shift         | Epoch/window shift of EEG input signal, in seconds.                                                            
+|                     | Default is 1                                                                                                   |
+| input_sampling_rate | EEG input signal sampling rate in Hz.                                                                          |
+|                     | Default is 32                                                                                                  |
+| runs                | No. of model weights used; weights were generated via 3 different random initializations during training runs. 
+|                     | Default is 3                                                                                                   
+| maf_window_size     | Used in the moving average filter (maf) applied to the probabilities before output.                            |
+|                     | Default is  69 - epoch_length, i.e. 53 for 16 sec window                                                       |
 
 Further details can be found in the paper [1]
 ___
