@@ -7,7 +7,7 @@
 1. [Introduction](#introduction)  
 2. [Software requirements](#software-requirements)  
 3. [Software build](#software-build)  
-4. [File and Folders' details](#File-descriptions)
+4. [File and Folder details](#File-descriptions)
 5. [Instructions for Use](#InstructionsforUse)
 6. [License](#License)
 7. [Authors](#Authors)
@@ -19,7 +19,7 @@
 
 This repository contains instructions for use and code for running a neonatal seizure detection deep learning algorithm using EEG signals as input.
 
-<br /> It is based on the published paper -link.
+<br /> It is based on the published paper [1] -link.
  
 ---  
    
@@ -36,7 +36,7 @@ $ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
 ```  
 ___
 
-## 4. File and Folders' details
+## 4. File and Folder details
   
 
 | Files                                      | Details                                                                                                       |    
@@ -48,39 +48,41 @@ ___
 | Folder                                   | Details                                                                                     |    
 |------------------------------------------|---------------------------------------------------------------------------------------------|        
 | [Benchmark_weights](./Benchmark_weights) | Contains 3 weights files for the model; generated using 3 different seeds in training.      |
-| [EEG files](./EEG_files)                 | EEG signal files; example files are given from the publicly available Helskinki dataset [1] |
+| [EEG files](./EEG_files)                 | EEG signal files; example files are given from the publicly available Helskinki dataset [2] |
 | [Results](./Results)                     | Folder for results output                                                                   |
-| [Utils](./Utils)                         | Contains the ConvNet.py file to create keras model and once created saves the file here.    |
+| [Utils](./Utils)                         | Contains the ConvNet.py file and the keras model file                                       
 
 ___
 
 ## 6. Instructions for Use
 
-The main file to run the algorithm is [Main_Inference.py](Main_Inference.py).  You can run this using the EEG files given with this repository which are from the Helsinki publicly available dataset [1].  
+The main file to run the algorithm is [Main_Inference.py](Main_Inference.py).  
 <br />  The probabilities of a seizure per second of inputted EEG signal are outputted by the algorithm in .npy format to the [Results](./Results) folder.
-<br />
+<br />  You can run this main file using the EEG files given with this repository which are from the Helsinki publicly available dataset [2]
+and are preprocessed as detailed below and as per the paper [1].
 ### EEG signal input file specifications
-<br /> The input EEG files need to be in .mat format, a matrix of N by M, where N is the EEG signal data and M is the number of EEG channels in the bipolar montage (TODO what montage expected, order does not play a role, etc); 
-<br /> EEG signal data, used in training and inference was, 32Hz sampling rate following a DC notch filter and 0.5-12.8 bandwidth antialiasing filtering.
+The input EEG files need to be in .mat format, a matrix of N by M, where N is the EEG signal data and M is the number of EEG channels in the bipolar montage (TODO what montage expected, order does not play a role, etc); 
+<br /> EEG signal data, used in training and inference, was 32Hz sampling rate following a DC notch filter and 0.5-12.8 bandwidth anti-aliasing filtering.
 
 ### Adjustable parameters in [Main_Inference.py](Main_Inference.py)
-These are the main parameters can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training, are given here.
+These are the main parameters can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training and inference, are given here.
 
-| Parameter           | Description                                                                              |    
-|---------------------|------------------------------------------------------------------------------------------|        
-| file_list           | List of EEG signal files to be input which are located in [EEG files](./EEG_files)       
-|                     | e.g. ["eeg1_SIGNAL.mat", "eeg4_SIGNAL.mat"]                                              |
-| epoch_length        | Epoch/window length of the EEG signal input in seconds                                   |
-|                     | Default is 16                                                                            |
-| epoch_shift         | Epoch/window shift in seconds (of EEG signal input)                                      
-|                     | Default is 1                                                                             |
-| input_sampling_rate | EEG input signal sampling rate in Hz                                                     |
-|                     | Default is 32                                                                            |
-| runs                | No. of model weights used; weights were generated via 3 different random initializations during training runs
-|                     | Default is 3
-| maf_window_size     | Used in the moving average filter applied to the probabilities before output|
-|                     | Default is  69 - epoch_length, i.e. 53 for 16 sec window        |
+| Parameter           | Description                                                                                                  |    
+|---------------------|--------------------------------------------------------------------------------------------------------------|        
+| file_list           | List of EEG signal files names to be input and these files should be located in [EEG files](./EEG_files)     
+|                     | e.g. ["eeg1_SIGNAL.mat", "eeg4_SIGNAL.mat"]                                                                  |
+| epoch_length        | Epoch/window input length of the EEG signal, in seconds                                                      |
+|                     | Default is 16                                                                                                |
+| epoch_shift         | Epoch/window shift of EEG signal input, in seconds                                                           
+|                     | Default is 1                                                                                                 |
+| input_sampling_rate | EEG input signal sampling rate in Hz                                                                         |
+|                     | Default is 32                                                                                                |
+| runs                | No. of model weights used; weights were generated via 3 different random initializations during training runs 
+|                     | Default is 3                                                                                                 
+| maf_window_size     | Used in the moving average filter (maf) applied to the probabilities before output                           |
+|                     | Default is  69 - epoch_length, i.e. 53 for 16 sec window                                                     |
 
+Further details are given in the paper [1]
 ___
 
 ## 7. License
