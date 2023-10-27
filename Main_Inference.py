@@ -24,14 +24,13 @@ weights_path = './Benchmark_weights/'  # Folder with the model weights
 eeg_file_path = 'EEG_files/'  # Folder with EEG signal data
 results_path = './Results/' # Folder for storing results output
 model_path = 'Utils/ConvNet_model.keras'  # Path for keras model
-file_list = ["eeg1_SIGNAL.mat", "eeg4_SIGNAL.mat"] #
+file_list = ["eeg1_SIGNAL.mat", "eeg4_SIGNAL.mat"]  # List of EEG signal files which are located in eeg_file_path
 epoch_length = 16  # Length of epoch/window input of EEG signal in seconds
 epoch_shift = 1 # Epoch/window shift in seconds
 input_sampling_rate = 32  # 32 Hz is the input signal sampling rate
-sample_rate = 1 # Sampling rate used to make data epoch/window slices in TSG
+sample_rate = 1 # Sampling rate per input_sample_rate used to make data epoch/window slices in TSG; unlikely to be adjusted
 runs = 3  # No. of model weights used; weights were generated via different random initializations during training runs.
-window_size = 69 - epoch_length  # 53 for 16 sec window, used in Moving Average Filter
-model_weights_files = [] # initialize
+maf_window_size = 69 - epoch_length  # 53 for 16 sec window, used in Moving Average Filter
 weights_list = {"1": ['best_weights_run0_hski_trained.hdf5'],
                 "2": ['best_weights_run0_hski_trained.hdf5','best_weights_run1_hski_trained.hdf5'],
                 "3": ['best_weights_run0_hski_trained.hdf5','best_weights_run1_hski_trained.hdf5','best_weights_run2_hski_trained.hdf5']}
