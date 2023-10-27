@@ -39,18 +39,18 @@ ___
 ## 4. File and Folder details
   
 
-| Files                                      | Details                                                                                                       |    
-|--------------------------------------------|---------------------------------------------------------------------------------------------------------------|        
-| [Main_Inference.py](Main_Inference.py)     | Main file for running seizure detection algorithm                                                             |
-| [ConvNet.py](ConvNet.py)                   | Code for generating the deep learning model and the keras model file; both are in the folder [Utils](./Utils) |
-| [ConvNet_model.keras](ConvNet_model.keras) | Keras model file                                                                                              |
+| Files                                      | Details                                                                                  |    
+|--------------------------------------------|------------------------------------------------------------------------------------------|        
+| [Main_Inference.py](Main_Inference.py)     | Main file for running seizure detection algorithm                                        |
+| [ConvNet.py](ConvNet.py)                   | Code for generating the keras model file, both are stored in the folder [Utils](./Utils) |
+| [ConvNet_model.keras](ConvNet_model.keras) | Keras model file                                                                         |
 
-| Folder                                   | Details                                                                                     |    
-|------------------------------------------|---------------------------------------------------------------------------------------------|        
-| [Benchmark_weights](./Benchmark_weights) | Contains 3 weights files for the model; generated using 3 different seeds in training.      |
-| [EEG files](./EEG_files)                 | EEG signal files; example files are given from the publicly available Helskinki dataset [2] |
-| [Results](./Results)                     | Folder for results output                                                                   |
-| [Utils](./Utils)                         | Contains the ConvNet.py file and the keras model file                                       
+| Folder                                   | Details                                                                                        |    
+|------------------------------------------|------------------------------------------------------------------------------------------------|        
+| [Benchmark_weights](./Benchmark_weights) | Contains 3 model weights files; generated using 3 different seeds in training.                 |
+| [EEG files](./EEG_files)                 | EEG signal files; example files are included from the publicly available Helskinki dataset [2] |
+| [Results](./Results)                     | Folder for results output                                                                      |
+| [Utils](./Utils)                         | Contains the ConvNet.py file and the keras model file                                          
 
 ___
 
@@ -63,25 +63,25 @@ and are preprocessed as detailed below and described in the paper [1].
 ### EEG signal input file specifications
 The input EEG files need to be in .mat format, a matrix of N by M, where N is the EEG signal data and M is the number of EEG channels in a bipolar montage.
 <br /> The bipolar montage used, including order, in training and inference are given in [1] and [2], other bipolar configurations can be tested. 
-<br /> EEG signal data, used in training and inference, was 32Hz sampling rate following a DC notch filter and 0.5-12.8 bandwidth anti-aliasing filtering.
+<br /> EEG signal data, used in training and inference, was 32Hz sampling rate following pre-processing by a DC notch filter and 0.5-12.8 bandwidth anti-aliasing filter.
 
 ### Adjustable parameters in [Main_Inference.py](Main_Inference.py)
 These are the main parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training and inference, are also given here.
 
-| Parameter           | Description                                                                                                    |    
-|---------------------|----------------------------------------------------------------------------------------------------------------|        
-| file_list           | List of EEG signal files names to be input; these files should be located in [EEG files](./EEG_files).         
-|                     | e.g. ["eeg1_SIGNAL.mat", "eeg4_SIGNAL.mat"]                                                                    |
-| epoch_length        | Epoch/window length of the EEG input signal, in seconds.                                                       |
-|                     | Default is 16                                                                                                  |
-| epoch_shift         | Epoch/window shift of EEG input signal, in seconds.                                                            
-|                     | Default is 1                                                                                                   |
-| input_sampling_rate | EEG input signal sampling rate in Hz.                                                                          |
-|                     | Default is 32                                                                                                  |
-| runs                | No. of model weights used; weights were generated via 3 different random initializations during training runs. 
-|                     | Default is 3                                                                                                   
-| maf_window_size     | Used in the moving average filter (maf) applied to the probabilities before output.                            |
-|                     | Default is  69 - epoch_length, i.e. 53 for 16 sec window                                                       |
+| Parameter           | Description                                                                                              |    
+|---------------------|----------------------------------------------------------------------------------------------------------|        
+| file_list           | List of EEG signal files names to be processed; these files should be located in [EEG files](./EEG_files).   
+|                     | e.g. ["eeg1_SIGNAL.mat", "eeg4_SIGNAL.mat"]                                                              |
+| epoch_length        | Epoch/window length of the EEG input signal, in seconds.                                                 |
+|                     | Default is 16                                                                                            |
+| epoch_shift         | Epoch/window shift of EEG input signal, in seconds.                                                      
+|                     | Default is 1                                                                                             |
+| input_sampling_rate | EEG input signal sampling rate in Hz.                                                                    |
+|                     | Default is 32                                                                                            |
+| runs                | No. of model weights files used; weights were generated via 3 different random initialization training runs. 
+|                     | Default is 3                                                                                             
+| maf_window_size     | Used in the moving average filter applied to the probabilities before output.                            |
+|                     | Default is  69 - epoch_length, i.e. 53 for 16 sec window                                                 |
 
 Further details can be found in the paper [1]
 ___
