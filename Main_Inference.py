@@ -101,10 +101,9 @@ def inference():
         # probs_full = np.append(probs_full, probs) # To be used for concatenating probs
 
         print('For no. of model runs...', runs)
-        results_file_name = results_path + 'probs_'+ baby[:-4] + '.npy'
+        results_file_name = results_path + 'probs_' + baby[:-4] + '.npy'
         np.save(results_file_name, probs_full)
         print('Probabilities created in folder/file....',results_file_name)
-        print("--- %.0f seconds ---" % (time.time() - start_time))
         print("--- %.0f seconds ---" % (time.time() - start_time))
 
 
