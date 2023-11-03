@@ -45,7 +45,7 @@ ___
 | [ConvNet.py](ConvNet.py)                   | Code for generating the keras model file, both are stored in the folder [Utils](./Utils) |
 | [ConvNet_model.keras](ConvNet_model.keras) | Keras model file                                                                         |
 
-| Folder                                   | Details                                                                                        |    
+| Folders                                  | Details                                                                                        |    
 |------------------------------------------|------------------------------------------------------------------------------------------------|        
 | [Benchmark_weights](./Benchmark_weights) | Contains 3 model weights files; generated using 3 different seeds in training.                 |
 | [EEG files](./EEG_files)                 | EEG signal files; example files are included from the publicly available Helskinki dataset [2] |
