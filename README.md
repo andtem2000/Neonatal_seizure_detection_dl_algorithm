@@ -59,7 +59,7 @@ ___
 The main file to run the algorithm is [Main_Inference.py](Main_Inference.py).  
 <br />  The probabilities of a seizure per second of inputted EEG signal are outputted by the algorithm in .npy format to the [Results](./Results) folder.
 <br />  You can run this main file using the EEG files given with this repository which are from the Helsinki publicly available dataset [2]
-and are preprocessed as detailed below and as described in the paper [1].
+and are preprocessed as detailed below and as described in the paper  [1].
 ### EEG signal input file specifications
 The input EEG files need to be in .mat format, a matrix of N by M, where N is the EEG signal data and M is the number of EEG channels in a bipolar montage.
 <br /> The bipolar montage used, including order, in training and inference are given in [1] and [2], other bipolar configurations can be tested. 
