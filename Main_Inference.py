@@ -17,7 +17,7 @@ from pathlib import Path
 start_time = time.time()
 epoch_length = 16  # Length of epoch/window input of EEG signal in seconds; needs to be greater or equal to 16
 epoch_shift = 1 # Epoch/window shift in seconds
-maf_window_size = 69 # In seconds used in Moving Average Filter
+maf_window_parameter = 69 # In seconds used in Moving Average Filter
 file_list = ["./EEG_files/eeg1_SIGNAL.mat", "./EEG_files/eeg4_SIGNAL.mat"]  # List of EEG signal files
 weights_list = ['./Benchmark_weights/best_weights_run0_hski_trained.hdf5',
                 './Benchmark_weights/best_weights_run1_hski_trained.hdf5',
@@ -57,7 +57,7 @@ def movingaverage(data):
     :return: data after the MAF has been applied
     """
     data = data
-    window = (69 - epoch_length)/epoch_shift
+    window = (maf_window_parameter - epoch_length)/epoch_shift # default case is (69 - 16)/ 1 = 53 seconds
     window = np.ones(int(window)) / float(window)
     return np.convolve(data, window, "same")
 

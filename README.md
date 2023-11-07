@@ -39,23 +39,23 @@ ___
 ## 4. File and Folder details
   
 
-| Files                                      | Details                                                                     |    
-|--------------------------------------------|-----------------------------------------------------------------------------|        
-| [Main_Inference.py](Main_Inference.py)     | Main file for running seizure detection algorithm                           |
-| [ConvNet.py](ConvNet.py)                   | Code for generating the model |
+| Files                                      | Details                                          |    
+|--------------------------------------------|--------------------------------------------------|        
+| [Main_Inference.py](Main_Inference.py)     | The file for running seizure detection algorithm |
+| [ConvNet.py](ConvNet.py)                   | Code for generating the deep learning model      |
 
 
 | Folders                                  | Details                                                                                       |    
 |------------------------------------------|-----------------------------------------------------------------------------------------------|        
 | [Benchmark_weights](./Benchmark_weights) | Contains 3 model weights files; generated using 3 different seeds in training.                |
 | [EEG files](./EEG_files)                 | Folder containing example EEG signal files from the publicly available Helskinki dataset [2]. |
-| [Results](./Results)                     | Folder for results, i.e probability trace output.                                             | 
+| [Results](./Results)                     | Folder for results, i.e probability trace outputted for each EEG signal file inputted.        | 
 
 ___
 
 ## 6. Instructions for Use
 
-The main file to run the algorithm is [Main_Inference.py](Main_Inference.py).  
+The file to run the algorithm is [Main_Inference.py](Main_Inference.py).  
 <br />  The probabilities of a seizure per second of inputted EEG signal are outputted by the algorithm in .npy format to the [Results](./Results) folder.
 <br />  You can run this main file using the EEG files given with this repository which are from the Helsinki publicly available dataset [2]
 and are preprocessed as detailed below and as described in the paper  [1].
@@ -67,21 +67,21 @@ The input EEG files need to be in .mat format, a matrix of N by M, where N is th
 ### Adjustable parameters in [Main_Inference.py](Main_Inference.py)
 These are the main parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training and inference, are also given here.
 
-| Parameter       | Description                                                                                                                                                                     |    
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| epoch_length    | Epoch/window length of the EEG input signal, in seconds.                                                                                                                        |
-|                 | Default is 16                                                                                                                                                                   |
-| epoch_shift     | Epoch/window shift of EEG input signal, in seconds.                                                                                                                             
-|                 | Default is 1                                                                                                                                                                    |
-| maf_window_size | Length in seconds of the moving average filter (maf) window size.                                                                                                               |
-|                 | Default is 69                                                                                                                                                                   |
-| file_list       | List of folder/file names of EEG signal files to be processed.                                                                                                                  |
-|                 | e.g. ["./EEG_files/eeg1_SIGNAL.mat", "./EEG_files/eeg4_SIGNAL.mat"]                                                                                                             |
-| weights_list    | List of folder/file names of model weight files to be processed; 3 different files exist from 3 different training seed-runs                                                    |
-|                 | ['./Benchmark_weights/best_weights_run0_hski_trained.hdf5',                                                                                                                     |
-|                 | ,'./Benchmark_weights/best_weights_run1_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5'] | 
-| results_path    | Folder to store the results-probabilities output                                                                                                                                |
-|                 | './Results/'                                                                                                                                                                    |
+| Parameter            | Description                                                                                                                                                                     |    
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| epoch_length         | Epoch/window length of the EEG input signal, in seconds.                                                                                                                        |
+|                      | Default is 16                                                                                                                                                                   |
+| epoch_shift          | Epoch/window shift of EEG input signal, in seconds.                                                                                                                             
+|                      | Default is 1                                                                                                                                                                    |
+| maf_window_parameter | Length in seconds of the moving average filter (maf) window parameter used in the maf.                                                                                          |
+|                      | Default is 69                                                                                                                                                                   |
+| file_list            | List of folder/file names of EEG signal files to be processed.                                                                                                                  |
+|                      | e.g. ["./EEG_files/eeg1_SIGNAL.mat", "./EEG_files/eeg4_SIGNAL.mat"]                                                                                                             |
+| weights_list         | List of folder/file names of model weight files; 3 different files exist from 3 different training seed-runs                                                                    |
+|                      | ['./Benchmark_weights/best_weights_run0_hski_trained.hdf5',                                                                                                                     |
+|                      | ,'./Benchmark_weights/best_weights_run1_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5'] | 
+| results_path         | Folder to store the results, i.e. probabilities outputted per individual file                                                                                                   |
+|                      | './Results/'                                                                                                                                                                    |
 
 Further details can be found in the paper [1]
 ___
