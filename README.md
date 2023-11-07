@@ -45,11 +45,11 @@ ___
 | [ConvNet.py](ConvNet.py)                   | Code for generating the model |
 
 
-| Folders                                  | Details                                                                                      |    
-|------------------------------------------|----------------------------------------------------------------------------------------------|        
-| [Benchmark_weights](./Benchmark_weights) | Contains 3 model weights files; generated using 3 different seeds in training.               |
-| [EEG files](./EEG_files)                 | Folder containing example EEG signal files from the publicly available Helskinki dataset [2] |
-| [Results](./Results)                     | Folder for results, i.e probability trace output                                             | 
+| Folders                                  | Details                                                                                       |    
+|------------------------------------------|-----------------------------------------------------------------------------------------------|        
+| [Benchmark_weights](./Benchmark_weights) | Contains 3 model weights files; generated using 3 different seeds in training.                |
+| [EEG files](./EEG_files)                 | Folder containing example EEG signal files from the publicly available Helskinki dataset [2]. |
+| [Results](./Results)                     | Folder for results, i.e probability trace output.                                             | 
 
 ___
 

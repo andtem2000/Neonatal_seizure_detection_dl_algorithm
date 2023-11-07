@@ -15,21 +15,21 @@ from ConvNet import res_net
 from pathlib import Path
 
 start_time = time.time()
-epoch_length = 16  # Length of epoch/window input of EEG signal in seconds, value needs to be greater or equal to 16
+epoch_length = 16  # Length of epoch/window input of EEG signal in seconds; needs to be greater or equal to 16
 epoch_shift = 1 # Epoch/window shift in seconds
 maf_window_size = 69 # In seconds used in Moving Average Filter
-file_list = ["./EEG_files/eeg1_SIGNAL.mat", "./EEG_files/eeg4_SIGNAL.mat"]  # List of EEG signal files which are located in eeg_file_path
+file_list = ["./EEG_files/eeg1_SIGNAL.mat", "./EEG_files/eeg4_SIGNAL.mat"]  # List of EEG signal files
 weights_list = ['./Benchmark_weights/best_weights_run0_hski_trained.hdf5',
                 './Benchmark_weights/best_weights_run1_hski_trained.hdf5',
                 './Benchmark_weights/best_weights_run2_hski_trained.hdf5']  # List of file names for model weights
-results_path = './Results/'  # Folder for storing results output
+results_path = './Results/'  # Folder for storing results/probability output on a per EEG signal file basis
 
 input_sampling_rate = 32  # 32 Hz sampling rate for the EEG signal, not to be changed
 
 
 def getdata(baby):
     """
-    Function to process the EEG signal data
+    Function to generate windows of data the EEG signal data
     :param baby: file name of the EEG signal data
     :return: series of data windows, no. of eeg channels
     """
@@ -52,20 +52,22 @@ def getdata(baby):
 
 def movingaverage(data):
     """
-    Moving average filter used on outputted probabilities
+    Moving average filter function that is applied to outputted probabilities
     :param data: the vector to which the MAF will be applied
     :return: data after the MAF has been applied
     """
     data = data
-    window = (69 - epoch_shift)/epoch_shift
+    window = (69 - epoch_length)/epoch_shift
     window = np.ones(int(window)) / float(window)
     return np.convolve(data, window, "same")
 
 
 def inference():
-    """ Primary function, run below via __main__"""
+    """ Primary function, run below via __main__
+    Outputs to file the probability trace for each individual EEG signal file inputted
+    """
 
-    first = True # first item of loop indicator for printing one model summary etc
+    first = True  # first item of loop indicator for printing one model summary etc
 
     for signal_file in file_list:
 
@@ -90,9 +92,9 @@ def inference():
 
         probs_full = np.asarray(probs_full)
         probs_full = np.mean(probs_full, 0)
-        # probs_full = np.append(probs_full, probs) # To be used for concatenating probs
+        # probs_full = np.append(probs_full, probs) # To be used if concatenating probs for many EEG signal files together for outputting to one file
 
-        file_name = Path(signal_file).name
+        file_name = Path(signal_file).name # Used for naming output file by using input file name
         results_file_name = results_path + 'probs_' + file_name[:-4] + '.npy'
         np.save(results_file_name, probs_full)
         print('Completed inference for EEG folder/file....', signal_file)
