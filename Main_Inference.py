@@ -29,7 +29,7 @@ input_sampling_rate = 32  # 32 Hz sampling rate for the EEG signal, not to be ch
 
 def getdata(baby):
     """
-    Function to generate windows of data the EEG signal data
+    Function to generate windows of data from the EEG signal data
     :param baby: file name of the EEG signal data
     :return: series of data windows, no. of eeg channels
     """
