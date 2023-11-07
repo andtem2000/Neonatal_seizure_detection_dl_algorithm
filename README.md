@@ -25,7 +25,7 @@ This repository contains instructions for use and code for running a neonatal se
    
 ## 2. Software/Hardware requirements
 Python 3.8
-<br />Tensorflow 2.3.0
+<br />Tensorflow 2.3.0, Keras 2.4.3
 <br /> GPU is not necessary.  
 ___  
 ## 3. Software build
