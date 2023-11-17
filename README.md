@@ -24,8 +24,7 @@ This repository contains instructions for running a neonatal seizure detection d
 ---  
    
 ## 2. Software/Hardware requirements
-Python 3.9.12
-<br />Tensorflow 2.10.0, Keras 2.10.0
+Python 3.9.12, Tensorflow 2.10.0, Keras 2.10.0
 <br /> It will work with older versions also.
 <br /> GPU is not necessary.  
 ___  
@@ -40,10 +39,10 @@ ___
 ## 4. File and Folder details
   
 
-| Files                                      | Details                                          |    
-|--------------------------------------------|--------------------------------------------------|        
-| [Main_Inference.py](Main_Inference.py)     | The file for running seizure detection algorithm |
-| [ConvNet.py](ConvNet.py)                   | Code for generating the deep learning model      |
+| Files                                      | Details                                              |    
+|--------------------------------------------|------------------------------------------------------|        
+| [Main_Inference.py](Main_Inference.py)     | The file for running the seizure detection algorithm |
+| [ConvNet.py](ConvNet.py)                   | Code for generating the deep learning model          |
 
 
 | Folders                                  | Details                                                                                       |    
@@ -62,11 +61,11 @@ The file to run the algorithm is [Main_Inference.py](Main_Inference.py).
 and have been preprocessed as detailed below and as described in the paper  [1].
 ### EEG signal input file specifications
 The input EEG files need to be in .mat format, a matrix of N by M, where N is the EEG signal data and M is the number of EEG channels in a bipolar montage.
-<br /> The bipolar montage used, including order, in training and inference are given in [1] and [2], other bipolar configurations can be tested. 
+The bipolar montage used, including order, in training and inference are given in [1] and [2], other bipolar configurations can be tested. 
 <br /> EEG signal data should be at 32Hz sampling rate and during training was preprocessing by a DC notch filter and 0.5-12.8 bandwidth anti-aliasing filter.
 
 ### Adjustable parameters in [Main_Inference.py](Main_Inference.py)
-These are the main parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training and inference, are also given here.
+These are the parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training and inference, are also given here.
 
 | Parameter            | Description                                                                                                                                                                     |    
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -78,9 +77,8 @@ These are the main parameters that can be adjusted by the user and are situated 
 |                      | Default is 69                                                                                                                                                                   |
 | file_list            | List of folder/file names of EEG signal files to be processed.                                                                                                                  |
 |                      | e.g. ["./EEG_files/eeg1_SIGNAL.mat", "./EEG_files/eeg4_SIGNAL.mat"]                                                                                                             |
-| weights_list         | List of folder/file names of model weight files; 3 different files exist from 3 different training seed-runs                                                                    |
-|                      | ['./Benchmark_weights/best_weights_run0_hski_trained.hdf5',                                                                                                                     |
-|                      | ,'./Benchmark_weights/best_weights_run1_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5'] | 
+| weights_list         | List of folder/file names of model weight files; 3 different files exist from 3 different training seed runs                                                                    |                                                                                                                    |
+|                      | ['./Benchmark_weights/best_weights_run1_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5'] | 
 | results_path         | Folder to store the results, i.e. probabilities outputted per individual file                                                                                                   |
 |                      | './Results/'                                                                                                                                                                    |
 
