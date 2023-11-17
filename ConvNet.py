@@ -2,14 +2,14 @@
 
 import keras.backend as k
 from keras.layers import Flatten, Input, Add, Cropping2D
-from keras.layers.core import Activation
+
 from keras.layers.convolutional import Conv2D, DepthwiseConv2D
-from keras.layers.pooling import AveragePooling2D, MaxPooling2D
-from keras.layers.normalization import BatchNormalization
-from keras.models import Model, load_model
+from keras.layers.pooling import AveragePooling2D
+from keras.layers import (BatchNormalization, MaxPooling2D, Activation, Flatten)
+from keras.models import Model
 from keras import initializers
 from keras.optimizers import Adam  # RAdam used in training put inference here so Adam optimizer has no impact
-filters_size = 32  # Cannot change the following parameters in test
+filters_size = 32  # Cannot change the following parameters
 kernel_size = 5
 init = initializers.glorot_uniform(seed=717)
 
@@ -80,7 +80,7 @@ def res_net(eeg_channels,input_length):
     output_layer = build_model(input_layer, init, eeg_channels=eeg_channels)
 
     model = Model(input_layer, output_layer)
-    opt = Adam(lr=0.001, decay=1e-6)  # This is not training only inference so these parameters need not be changed
+    opt = Adam(learning_rate=0.001, decay=1e-6)  # This is not training only inference so these parameters need not be changed
     model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
     model._name = "ConvNet"
     return model
