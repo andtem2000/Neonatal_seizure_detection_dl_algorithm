@@ -23,6 +23,11 @@ weights_list = ['./Benchmark_weights/best_weights_run0_hski_trained.hdf5',
                 './Benchmark_weights/best_weights_run1_hski_trained.hdf5',
                 './Benchmark_weights/best_weights_run2_hski_trained.hdf5']  # List of file names for model weights
 results_path = './Results/'  # Folder for storing results/probability output on a per EEG signal file basis
+# If you want to use the model weights that include the pseudo labelled data use the following as the weights_list
+# weights_list = ['./Benchmark_weights/best_weights_run0_hski_plus_pslabel_HIEInfant.hdf5',
+#                './Benchmark_weights/best_weights_run0_hski_plus_pslabel_HIEInfant.hdf5',
+#                './Benchmark_weights/best_weights_run0_hski_plus_pslabel_HIEInfant.hdf5']
+# List of file names for model weights after training with pseudo labels
 
 input_sampling_rate = 32  # 32 Hz sampling rate for the EEG signal, not to be changed
 

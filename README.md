@@ -17,16 +17,16 @@
 ---  
 ## 1. Introduction
 
-This repository contains instructions for running a neonatal seizure detection deep learning algorithm using EEG signals as input.
+This repository contains code and instructions for running a neonatal seizure detection deep learning algorithm using EEG signals as input.
 
-<br /> It is based on the published paper [1] -link.
+<br /> It is based on the published papers [1], [2] -links.
  
 ---  
    
 ## 2. Software/Hardware requirements
 Python 3.9.12, Tensorflow 2.10.0, Keras 2.10.0
 <br /> It will work with older versions also.
-<br /> GPU is not necessary.  
+<br /> GPU is not necessary but will reduce run time.  
 ___  
 ## 3. Software build
 Step 1: Get sources from GitHub 
@@ -47,7 +47,7 @@ ___
 
 | Folders                                  | Details                                                                                       |    
 |------------------------------------------|-----------------------------------------------------------------------------------------------|        
-| [Benchmark_weights](./Benchmark_weights) | Contains 3 model weights files; generated using 3 different seeds in training.                |
+| [Benchmark_weights](./Benchmark_weights) | Contains the model weights files; generated using 3 different seeds in training.              |
 | [EEG files](./EEG_files)                 | Folder containing example EEG signal files from the publicly available Helskinki dataset [2]. |
 | [Results](./Results)                     | Folder for results, i.e probability trace outputted for each EEG signal file inputted.        | 
 
@@ -56,31 +56,35 @@ ___
 ## 6. Instructions for Use
 
 The file to run the algorithm is [Main_Inference.py](Main_Inference.py).  
-<br />  The probabilities of a seizure per second of inputted EEG signal are outputted by the algorithm in .npy format to the [Results](./Results) folder.
-<br />  You can run this main file using the EEG files given with this repository which are from the Helsinki publicly available dataset [2]
+<br />  The probabilities of a seizure per second are output per second of inputted EEG signal in .npy format to the [Results](./Results) folder.
+<br />  You can run this main file using as input the EEG files given with this repository which are from the Helsinki publicly available dataset [3]
 and have been preprocessed as detailed below and as described in the paper  [1].
 ### EEG signal input file specifications
 The input EEG files need to be in .mat format, a matrix of N by M, where N is the EEG signal data and M is the number of EEG channels in a bipolar montage.
 The bipolar montage used, including order, in training and inference are given in [1] and [2], other bipolar configurations can be tested. 
 <br /> EEG signal data should be at 32Hz sampling rate and during training was preprocessing by a DC notch filter and 0.5-12.8 bandwidth anti-aliasing filter.
+### 2 Model variations
+There are two different model variations (weights) given.  One that was trained on the publicly available Helsinki dataset [3] and a second that was trained on 
+the Helsinki dataset plus the publicly available unannotated dataset [4] which was pseudo labelled by the authors using a novel technique fully described in [2].
+For each training routine 3 runs were completed using three different random seeds.  Further details are given in [1].
 
 ### Adjustable parameters in [Main_Inference.py](Main_Inference.py)
 These are the parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training and inference, are also given here.
 
-| Parameter            | Description                                                                                                                                                                     |    
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| epoch_length         | Epoch/window length of the EEG input signal, in seconds.                                                                                                                        |
-|                      | Default is 16                                                                                                                                                                   |
-| epoch_shift          | Epoch/window shift of EEG input signal, in seconds.                                                                                                                             
-|                      | Default is 1                                                                                                                                                                    |
-| maf_window_parameter | Length in seconds of the moving average filter (maf) window parameter used in the maf.                                                                                          |
-|                      | Default is 69                                                                                                                                                                   |
-| file_list            | List of folder/file names of EEG signal files to be processed.                                                                                                                  |
-|                      | e.g. ["./EEG_files/eeg1_SIGNAL.mat", "./EEG_files/eeg4_SIGNAL.mat"]                                                                                                             |
-| weights_list         | List of folder/file names of model weight files; 3 different files exist from 3 different training seed runs                                                                    |                                                                                                                    |
-|                      | ['./Benchmark_weights/best_weights_run1_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5'] | 
-| results_path         | Folder to store the results, i.e. probabilities outputted per individual file                                                                                                   |
-|                      | './Results/'                                                                                                                                                                    |
+| Parameter            | Description                                                                                                                                                                                                                                                                                                                                                                                |    
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| epoch_length         | Epoch/window length of the EEG input signal, in seconds.                                                                                                                                                                                                                                                                                                                                   |
+|                      | Default is 16                                                                                                                                                                                                                                                                                                                                                                              |
+| epoch_shift          | Epoch/window shift of EEG input signal, in seconds.                                                                                                                                                                                                                                                                                                                                        
+|                      | Default is 1                                                                                                                                                                                                                                                                                                                                                                               |
+| maf_window_parameter | Length in seconds of the moving average filter (maf) window parameter used in the maf.                                                                                                                                                                                                                                                                                                     |
+|                      | Default is 69                                                                                                                                                                                                                                                                                                                                                                              |
+| file_list            | List of folder/file names of EEG signal files to be processed.                                                                                                                                                                                                                                                                                                                             |
+|                      | e.g. ["./EEG_files/eeg1_SIGNAL.mat", "./EEG_files/eeg4_SIGNAL.mat"]                                                                                                                                                                                                                                                                                                                        |
+| weights_list         | List of folder/file names of model weight files; 2 sets of model weights are given<br/>,one trained on Helsinki data only( ..best_weights_run2_hski_trained) and a second trained on the Helsinki data plus pseudo label data from another publicly available dataset(...hski_plus_pslabel_HIEInfant)<br/> for each set of weights 3 different files exist from 3 different training seed runs |                                                                                                                    |
+|                      | ['./Benchmark_weights/best_weights_run1_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5','./Benchmark_weights/best_weights_run2_hski_trained.hdf5']                                                                                                                                                                                                            | 
+| results_path         | Folder to store the results, i.e. probabilities outputted per individual file                                                                                                                                                                                                                                                                                                              |
+|                      | './Results/'                                                                                                                                                                                                                                                                                                                                                                               |
 
 Further details can be found in the paper [1]
 ___
@@ -92,7 +96,9 @@ Aengus Daly, Gordon Lightbody, Andriy Temko
 ___
 ## 9. References
 [1]  Main file link
-[2]  Nathan Stevenson, Karoliina Tapani, Leena Lauronenand Sampsa Vanhatalo, “A dataset of neonatal EEG recordings with seizures annotations”. Zenodo, Jun. 05, 2018. doi: 10.5281/zenodo.2547147.
+[2] Pseudo label EUSIPCO conference file link
+[3]  Nathan Stevenson, Karoliina Tapani, Leena Lauronenand Sampsa Vanhatalo, “A dataset of neonatal EEG recordings with seizures annotations”. Zenodo, Jun. 05, 2018. doi: 10.5281/zenodo.2547147.
+[4]  HIE Infant file link
 ___
 ## 10. Contact
 
