@@ -55,7 +55,7 @@ def getdata(baby):
     return data_gen, no_eeg_channels
 
 
-def movingaverage(data):
+def moving_average_filter(data):
     """
     Moving average filter function that is applied to outputted probabilities
     :param data: the vector to which the MAF will be applied
@@ -92,7 +92,7 @@ def inference():
             model.load_weights(weights_str)
 
             probs = model.predict(data_windowed)[:, 1]
-            probs = movingaverage(probs)  # Applying moving average filter to probs
+            probs = moving_average_filter(probs)  # Applying moving average filter to probs
             probs_full.append(probs)  # Appending probs so that they can be averaged
 
         probs_full = np.asarray(probs_full)
