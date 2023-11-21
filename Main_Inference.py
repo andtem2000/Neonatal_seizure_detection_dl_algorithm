@@ -92,11 +92,11 @@ def inference():
             model.load_weights(weights_str)
 
             probs = model.predict(data_windowed)[:, 1]
-            probs = moving_average_filter(probs)  # Applying moving average filter to probs
             probs_full.append(probs)  # Appending probs so that they can be averaged
 
         probs_full = np.asarray(probs_full)
         probs_full = np.mean(probs_full, 0)
+        probs_full = moving_average_filter(probs_full) # Applying moving average filter to probs
         # probs_full = np.append(probs_full, probs) # To be used if concatenating probs for many EEG signal files together for outputting to one file
 
         file_name = Path(signal_file).name # Used for naming output file by using input file name
