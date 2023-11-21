@@ -112,7 +112,7 @@ Aengus Daly
 
 ### 10. Citation
 
-If you use this work, consider citing our [paper](https://arxiv.org/abs/2212.12794):
+If you use this work, consider citing our [paper](https://ieeexplore.ieee.org/document/10290015):
 
 ```latex
 @article{,
