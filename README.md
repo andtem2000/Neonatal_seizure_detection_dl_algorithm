@@ -109,4 +109,19 @@ Aengus Daly
 
 <br /> email aengus dot daly 'at' mtu.ie
 
+### Citation
+
+If you use this work, consider citing our [paper](https://arxiv.org/abs/2212.12794):
+
+```latex
+@article{lam2022graphcast,
+      title={GraphCast: Learning skillful medium-range global weather forecasting},
+      author={Remi Lam and Alvaro Sanchez-Gonzalez and Matthew Willson and Peter Wirnsberger and Meire Fortunato and Alexander Pritzel and Suman Ravuri and Timo Ewalds and Ferran Alet and Zach Eaton-Rosen and Weihua Hu and Alexander Merose and Stephan Hoyer and George Holland and Jacklynn Stott and Oriol Vinyals and Shakir Mohamed and Peter Battaglia},
+      year={2022},
+      eprint={2212.12794},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+```
+
 ___
