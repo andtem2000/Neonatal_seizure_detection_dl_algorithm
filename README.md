@@ -18,9 +18,9 @@
 ---  
 ## 1. Introduction
 
-This repository contains code and instructions for running a neonatal seizure detection deep learning algorithm using EEG signals as input.
+This repository contains code and instructions for running a neonatal seizure detection deep learning algorithm using EEG signals as input and a seizure probability trace as output.
 
-<br /> It is based on the published papers [1], [2] -links.
+<br /> It is based on the published papers [1], [2], [paper](https://ieeexplore.ieee.org/document/10290015).
 
 ___
 
