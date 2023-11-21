@@ -99,8 +99,8 @@ ___
 Aengus Daly, Gordon Lightbody, Andriy Temko
 ___
 ## 8. References
-<a href="https://en.wikipedia.org/wiki/The_Milagro_Beanfield_War_(novel)">paper 1</a>
-## \[1\]\: <br /> 
+
+[1] Main link: <br /> 
 [2] A. Daly, G. Lightbody and A. Temko, "Bridging the Source-Target Mismatch with Pseudo Labeling for Neonatal Seizure Detection," 2023 31st European Signal Processing Conference (EUSIPCO), Helsinki, Finland, 2023, pp. 1100-1104, doi: 10.23919/EUSIPCO58844.2023.10290015. [paper](https://ieeexplore.ieee.org/document/10290015) <br /> 
 [3] N. J. Stevenson, K. Tapani, L. Lauronen and S. Vanhatalo, "A dataset of neonatal EEG recordings with seizure annotations", Scientific Data, vol. 6, no. 1, Mar. 2019, Available: https://zenodo.org/records/4940267 <br /> 
 [4] J. M. O'Toole, "Neonatal EEG graded for severity of background abnormalities in hypoxic-ischaemic encephalopathy", arXiv, Jun. 2022, [online] Available: http://arxiv.org/abs/2206.04420
