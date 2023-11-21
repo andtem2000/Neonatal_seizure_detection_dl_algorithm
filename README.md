@@ -21,40 +21,10 @@
 This repository contains code and instructions for running a neonatal seizure detection deep learning algorithm using EEG signals as input.
 
 <br /> It is based on the published papers [1], [2] -links.
- 
----  
-   
-## 2. Software/Hardware requirements
-Python 3.9.12, Tensorflow 2.10.0, Keras 2.10.0
-<br /> It will work with older versions also.
-<br /> GPU is not necessary but will reduce run time.  
-___  
-## 3. Software build
-Step 1: Get sources from GitHub 
-```shell   
-$ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
- 
-```  
-___
-
-## 4. File and Folder details
-  
-
-| Files                                      | Details                                              |    
-|--------------------------------------------|------------------------------------------------------|        
-| [Main_Inference.py](Main_Inference.py)     | The file for running the seizure detection algorithm |
-| [ConvNet.py](ConvNet.py)                   | Code for generating the deep learning model          |
-
-
-| Folders                                  | Details                                                                                       |    
-|------------------------------------------|-----------------------------------------------------------------------------------------------|        
-| [Benchmark_weights](./Benchmark_weights) | Contains the model weights files; generated using 3 different seeds in training.              |
-| [EEG files](./EEG_files)                 | Folder containing example EEG signal files from the publicly available Helskinki dataset [2]. |
-| [Results](./Results)                     | Folder for results, i.e probability trace outputted for each EEG signal file inputted.        | 
 
 ___
 
-## 5. Instructions for Use
+## 2. Instructions for Use
 
 The file to run the algorithm is [Main_Inference.py](Main_Inference.py).  
 <br />  The probabilities of a seizure per second are output per second of inputted EEG signal in .npy format to the [Results](./Results) folder.
@@ -88,6 +58,37 @@ These are the parameters that can be adjusted by the user and are situated at th
 |                      | './Results/'                                                                                                                                                                                                                                                                                                                                                                                    |
 
 Further details can be found in the paper [1]
+
+---  
+
+## 3. File and Folder details
+  
+
+| Files                                      | Details                                              |    
+|--------------------------------------------|------------------------------------------------------|        
+| [Main_Inference.py](Main_Inference.py)     | The file for running the seizure detection algorithm |
+| [ConvNet.py](ConvNet.py)                   | Code for generating the deep learning model          |
+
+
+| Folders                                  | Details                                                                                       |    
+|------------------------------------------|-----------------------------------------------------------------------------------------------|        
+| [Benchmark_weights](./Benchmark_weights) | Contains the model weights files; generated using 3 different seeds in training.              |
+| [EEG files](./EEG_files)                 | Folder containing example EEG signal files from the publicly available Helskinki dataset [2]. |
+| [Results](./Results)                     | Folder for results, i.e probability trace outputted for each EEG signal file inputted.        | 
+
+___
+   
+## 4. Software/Hardware requirements
+Python 3.9.12, Tensorflow 2.10.0, Keras 2.10.0
+<br /> It will work with older versions also.
+<br /> GPU is not necessary but will reduce run time.  
+___  
+## 5. Software build
+Step 1: Get sources from GitHub 
+```shell   
+$ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
+ 
+```  
 ___
 
 ## 6. License
