@@ -4,16 +4,16 @@
   
 ---  
   ## Table of contents
-1. [Introduction](#1-introduction)  
-2. [Software requirements](#software-requirements)  
-3. [Software build](#software-build)  
-4. [File and Folder details](#File-descriptions)
-5. [Instructions for Use](#InstructionsforUse)
-6. [License](#License)
-7. [Authors](#Authors)
-8. [References](#References)
-9. [Contact](#Contact)
-10. [Citation](#10.-Citation)
+1. [Introduction](#1-introduction) 
+2. [Instructions for Use](#2-Instructions-for-Use)
+3. [File and Folder details](#3-File-and-Folder-details)
+4. [Software/Hardware requirements](#4-SoftwareHardware-Requirements)  
+5. [Software build](#5-software-build)
+6. [License](#6-License)
+7. [Authors](#7-Authors)
+8. [References](#8-References)
+9. [Contact](#9-Contact)
+10. [Citation](#10-Citation)
 
 ---  
 ## 1. Introduction
