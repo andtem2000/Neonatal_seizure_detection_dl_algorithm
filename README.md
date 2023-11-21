@@ -97,7 +97,7 @@ Aengus Daly, Gordon Lightbody, Andriy Temko
 ___
 ## 8. References
 [1] Main file link <br /> 
-[2] Pseudo label EUSIPCO conference file link <br /> 
+[2] A. Daly, G. Lightbody and A. Temko, "Bridging the Source-Target Mismatch with Pseudo Labeling for Neonatal Seizure Detection," 2023 31st European Signal Processing Conference (EUSIPCO), Helsinki, Finland, 2023, pp. 1100-1104, doi: 10.23919/EUSIPCO58844.2023.10290015. <br /> 
 [3] Nathan Stevenson, Karoliina Tapani, Leena Lauronenand Sampsa Vanhatalo, “A dataset of neonatal EEG recordings with seizures annotations”. Zenodo, Jun. 05, 2018. doi: 10.5281/zenodo.2547147. <br /> 
 [4] HIE Infant file link
 ___
@@ -115,14 +115,17 @@ Aengus Daly
 If you use this work, consider citing our [paper](https://ieeexplore.ieee.org/document/10290015):
 
 ```latex
-@article{,
-      title={x},
-      author={},
-      year={2023},
-      eprint={2212.12794},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
-}
+@INPROCEEDINGS{10290015,
+
+  author={Daly, Aengus and Lightbody, Gordon and Temko, Andriy},
+  booktitle={2023 31st European Signal Processing Conference (EUSIPCO)}, 
+  title={Bridging the Source-Target Mismatch with Pseudo Labeling for Neonatal Seizure Detection}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={1100-1104},
+  doi={10.23919/EUSIPCO58844.2023.10290015}}
+
 ```
 
 ___
