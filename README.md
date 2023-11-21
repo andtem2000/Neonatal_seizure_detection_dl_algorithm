@@ -99,7 +99,7 @@ ___
 [1] Main file link <br /> 
 [2] A. Daly, G. Lightbody and A. Temko, "Bridging the Source-Target Mismatch with Pseudo Labeling for Neonatal Seizure Detection," 2023 31st European Signal Processing Conference (EUSIPCO), Helsinki, Finland, 2023, pp. 1100-1104, doi: 10.23919/EUSIPCO58844.2023.10290015. [paper](https://ieeexplore.ieee.org/document/10290015) <br /> 
 [3] Nathan Stevenson, Karoliina Tapani, Leena Lauronenand Sampsa Vanhatalo, “A dataset of neonatal EEG recordings with seizures annotations”. Zenodo, Jun. 05, 2018. doi: 10.5281/zenodo.2547147. <br /> 
-[4] HIE Infant file link
+[4] J. M. O'Toole, "Neonatal EEG graded for severity of background abnormalities in hypoxic-ischaemic encephalopathy", arXiv, Jun. 2022, [online] Available: http://arxiv.org/abs/2206.04420
 ___
 ## 9. Contact
 
