@@ -13,21 +13,21 @@
 7. [Authors](#Authors)
 8. [References](#References)
 9. [Contact](#Contact)
-10. [Citation](#Citation)
+10. [Citation](#citation)
 
 ---  
 ## 1. Introduction
 
-This repository contains code and instructions for running a neonatal seizure detection deep learning algorithm using EEG signals as input and a seizure probability trace as output.
+This repository contains code and instructions for running a neonatal seizure detection deep learning algorithm using EEG signals as input and a probability of seizure trace as output.
 
-<br /> It is based on the published papers [1], [2], [paper](https://ieeexplore.ieee.org/document/10290015).
+<br /> It is based on the published papers [1], [2] [paper](https://ieeexplore.ieee.org/document/10290015).
 
 ___
 
 ## 2. Instructions for Use
 
 The file to run the algorithm is [Main_Inference.py](Main_Inference.py).  
-<br />  The probabilities of a seizure per second are output per second of inputted EEG signal in .npy format to the [Results](./Results) folder.
+<br />  The probabilities of a seizure per second are output, per second of inputted EEG signal, in .npy format to the [Results](./Results) folder.
 <br />  You can run this main file using as input the EEG files given with this repository which are from the Helsinki publicly available dataset [3]
 and have been preprocessed as detailed below and as described in the paper  [1].
 ### EEG signal input file specifications
@@ -40,7 +40,7 @@ the Helsinki dataset plus the publicly available unannotated dataset [4] which w
 For each of these training variations 3 runs were completed using three different random seeds.  Further details are given in [1].
 
 ### Adjustable parameters in [Main_Inference.py](Main_Inference.py)
-These are the parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py).  The default values, used in training and inference, are also given here.
+These are the parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py) file.  The default values, used in training and inference, are also given here.
 
 | Parameter            | Description                                                                                                                                                                                                                                                                                                                                                                                     |    
 |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,7 +48,7 @@ These are the parameters that can be adjusted by the user and are situated at th
 |                      | Default is 16                                                                                                                                                                                                                                                                                                                                                                                   |
 | epoch_shift          | Epoch/window shift of EEG input signal, in seconds.                                                                                                                                                                                                                                                                                                                                             
 |                      | Default is 1                                                                                                                                                                                                                                                                                                                                                                                    |
-| maf_window_parameter | Length in seconds of the moving average filter (maf) window parameter used in the maf.                                                                                                                                                                                                                                                                                                          |
+| maf_window_parameter | Length in seconds of the moving average filter (maf) window parameter.                                                                                                                                                                                                                                                                                                          |
 |                      | Default is 69                                                                                                                                                                                                                                                                                                                                                                                   |
 | file_list            | List of folder/file names of EEG signal files to be processed.                                                                                                                                                                                                                                                                                                                                  |
 |                      | e.g. ["./EEG_files/eeg1_SIGNAL.mat", "./EEG_files/eeg4_SIGNAL.mat"]                                                                                                                                                                                                                                                                                                                             |
@@ -81,7 +81,7 @@ ___
 ## 4. Software/Hardware requirements
 Python 3.9.12, Tensorflow 2.10.0, Keras 2.10.0
 <br /> It will work with older versions also.
-<br /> GPU is not necessary but will reduce run time.  
+<br /> GPU use will reduce run time.  
 ___  
 ## 5. Software build
 Step 1: Get sources from GitHub 
@@ -92,6 +92,8 @@ $ git clone https://github.com/CiallC/Neonatal_seizure_resnext.git
 ___
 
 ## 6. License
+
+The model code and weights are made available for use under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0). You may obtain a copy of the License at: https://creativecommons.org/licenses/by-nc-sa/4.0/.
 ___
 ## 7. Authors
 Aengus Daly, Gordon Lightbody, Andriy Temko
