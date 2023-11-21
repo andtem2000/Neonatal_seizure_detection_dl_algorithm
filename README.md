@@ -13,7 +13,7 @@
 7. [Authors](#Authors)
 8. [References](#References)
 9. [Contact](#Contact)
-10. [Citation](#10. Citation)
+10. [Citation](#10.-Citation)
 
 ---  
 ## 1. Introduction
