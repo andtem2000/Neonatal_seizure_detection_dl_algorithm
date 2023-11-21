@@ -116,7 +116,7 @@ Aengus Daly
 
 ## 10. Citation
 
-If you use this work, consider citing our [paper](https://ieeexplore.ieee.org/document/10290015):
+If you use this work, consider citing our (update to new paper) [paper](https://ieeexplore.ieee.org/document/10290015):
 
 ```latex
 @INPROCEEDINGS{10290015,
