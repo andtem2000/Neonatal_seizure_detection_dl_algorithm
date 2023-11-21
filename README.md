@@ -13,6 +13,7 @@
 7. [Authors](#Authors)
 8. [References](#References)
 9. [Contact](#Contact)
+10. [Citation](#Citation)
 
 ---  
 ## 1. Introduction
@@ -53,7 +54,7 @@ ___
 
 ___
 
-## 6. Instructions for Use
+## 5. Instructions for Use
 
 The file to run the algorithm is [Main_Inference.py](Main_Inference.py).  
 <br />  The probabilities of a seizure per second are output per second of inputted EEG signal in .npy format to the [Results](./Results) folder.
@@ -89,18 +90,18 @@ These are the parameters that can be adjusted by the user and are situated at th
 Further details can be found in the paper [1]
 ___
 
-## 7. License
+## 6. License
 ___
-## 8. Authors
+## 7. Authors
 Aengus Daly, Gordon Lightbody, Andriy Temko
 ___
-## 9. References
+## 8. References
 [1] Main file link <br /> 
 [2] Pseudo label EUSIPCO conference file link <br /> 
 [3] Nathan Stevenson, Karoliina Tapani, Leena Lauronenand Sampsa Vanhatalo, “A dataset of neonatal EEG recordings with seizures annotations”. Zenodo, Jun. 05, 2018. doi: 10.5281/zenodo.2547147. <br /> 
 [4] HIE Infant file link
 ___
-## 10. Contact
+## 9. Contact
 
 Aengus Daly 
 <br /> Munster Technological University,
@@ -109,15 +110,15 @@ Aengus Daly
 
 <br /> email aengus dot daly 'at' mtu.ie
 
-### Citation
+### 10. Citation
 
 If you use this work, consider citing our [paper](https://arxiv.org/abs/2212.12794):
 
 ```latex
-@article{lam2022graphcast,
-      title={GraphCast: Learning skillful medium-range global weather forecasting},
-      author={Remi Lam and Alvaro Sanchez-Gonzalez and Matthew Willson and Peter Wirnsberger and Meire Fortunato and Alexander Pritzel and Suman Ravuri and Timo Ewalds and Ferran Alet and Zach Eaton-Rosen and Weihua Hu and Alexander Merose and Stephan Hoyer and George Holland and Jacklynn Stott and Oriol Vinyals and Shakir Mohamed and Peter Battaglia},
-      year={2022},
+@article{,
+      title={x},
+      author={},
+      year={2023},
       eprint={2212.12794},
       archivePrefix={arXiv},
       primaryClass={cs.LG}
