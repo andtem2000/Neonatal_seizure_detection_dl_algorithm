@@ -4,7 +4,7 @@
   
 ---  
   ## Table of contents
-1. [Introduction](#introduction)  
+1. [Introduction](#1-introduction)  
 2. [Software requirements](#software-requirements)  
 3. [Software build](#software-build)  
 4. [File and Folder details](#File-descriptions)
@@ -113,7 +113,7 @@ Aengus Daly
 
 <br /> email aengus dot daly 'at' mtu.ie
 
-### 10. Citation
+## 10. Citation
 
 If you use this work, consider citing our [paper](https://ieeexplore.ieee.org/document/10290015):
 
