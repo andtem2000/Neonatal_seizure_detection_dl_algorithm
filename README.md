@@ -39,7 +39,7 @@ the Helsinki dataset plus the publicly available unannotated dataset [4] which w
 For each of these training variations 3 runs were completed using three different random seeds.  Further details are given in [1].
 
 ### Adjustable parameters in [Main_Inference.py](Main_Inference.py)
-These are the parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py) file.  The default values, used in training and inference, are also given here in the gray coloured rows.
+These are the parameters that can be adjusted by the user and are situated at the top of [Main_Inference.py](Main_Inference.py) file.  The default values, used in training and inference, are also given here in the grey coloured rows.
 
 | Parameter            | Description                                                                                                                                                                                                                                                                                                                                                                                      |    
 |----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
